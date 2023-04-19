@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<!-- This file was generated automatically. [2021_08_18_14_10_08] -->
+<!-- [Tool url: git@github.jpl.nasa.gov:CR/rst.git, branch: dev/working, commit_hash: 47e8686b, commit_time: 2021-08-16 19:00:50 -0700] -->
+
+<robot name="simple_ground" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<link name="ground">
+		<inertial>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="0"/>
+			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+		</inertial>
+
+
+		<visual name="VisGround">
+			<origin xyz="0.09002 0 -1.13338" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/models/simple_ground/simple_ground.dae" scale="1 1 1"/>
+			</geometry>
+		</visual>		
+	</link>
+	
+
+</robot>

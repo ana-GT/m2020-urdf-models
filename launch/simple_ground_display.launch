@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+  
+  <arg name="rviz" default="false"/>
+
+    <param name="ground_robot_description" command="$(find xacro)/xacro '$(find m2020_urdf_models)/urdf/simple_ground.xacro'"/>  
+
+      <node name="ground_robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <remap from="robot_description" to="ground_robot_description"/>
+      </node>
+      
+    <node name="world_to_ground" pkg="tf" type="static_transform_publisher" args=" $(arg x) $(arg y) $(arg z) 0 0 0 world ground 10" respawn="false" output="screen"/>  
+
+
+  
+  <!-- Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/ground.rviz" respawn="false" output="screen" if="$(arg rviz)"/>  
+  
+</launch>

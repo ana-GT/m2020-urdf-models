@@ -16,6 +16,10 @@
   <!-- Craftsman Gui allows you to control either robot -->
   <param name="show_namespace" value="true"/>
 
+  <!-- Ground -->
+  <include file="$(find m2020_urdf_models)/launch/simple_ground_display.launch"/>
+
+
   <!-- Perseverance 1 -->
   <include file="$(find m2020_urdf_models)/launch/perseverance_demo.launch">
     <arg name="robot_name" value="perseverance_1"/>
