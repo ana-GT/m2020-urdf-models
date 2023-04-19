@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<robot name="perseverance">
+    <group name="arm">
+        <chain base_link="Body_RA_Base" tip_link="Body_RA_Link5" />
+    </group>
+
+
+    <group_state name="zero" group="arm">
+        <joint name="JOINT1_ENC" value="0.0"/>
+        <joint name="JOINT2_ENC" value="0.0" />
+        <joint name="JOINT3_ENC" value="0.0" />
+        <joint name="JOINT4_ENC" value="0.0" />
+        <joint name="JOINT5_ENC" value="0.0" />
+    </group_state>
+
+
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+<!--    <disable_collisions link1="base_link" link2="bellows_link" reason="Default" />
+    <disable_collisions link1="base_link" link2="bellows_link2" reason="Default" />
+    <disable_collisions link1="base_link" link2="estop_link" reason="Adjacent" />
+-->
+</robot>

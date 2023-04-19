@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Set to true if you want to start with a trajectory with a single waypoint on it -->
+  <arg name="robot_name" default="fetch"/>
+  <arg name="rviz_sim" default="true"/>
+  <arg name="nav_reference_frame" default="base_link"/>
+  <arg name="nav_frame_id" default="world"/>
+  <arg name="nav_controller" default="/fetch/mobile_base_controller/cmd_vel"/>
+  <arg name="nav_interface" default="basic_navigators::PlanarNavInterface"/>
+  <arg name="nav_executor" default="basic_navigation_executors::Path2DPIDExecutor"/>
+  <arg name="standalone_nav_control_node" default="false"/>
+  
+  <rosparam file="$(find craftsman_robots)/config/fetch/fetch_navigation.yaml" command="load" ns="$(arg robot_name)" />
+
+  <!-- Simulate odometry in Rviz -->
+  <group if="$(arg rviz_sim)">
+    <node name="fake_base_cmd" pkg="navigation_interface" type="fake_base_cmd" respawn="false" output="screen">
+      <param name="reference_frame" value="$(arg nav_reference_frame)"/>
+      <param name="frame_id" value="$(arg nav_frame_id)"/>
+      <param name="cmd_vel" value="$(arg nav_controller)"/>
+      <param name="jnt_cmd" value="/fetch/joint_state_controller/joint_command" />
+    </node>
+  </group>
+
+  <node ns="$(arg robot_name)" name="navigation_execution_node" pkg="navigation_execution_interface" type="navigation_execution_node" respawn="false" output="screen">
+
+    <param name="robot_name" value="$(arg robot_name)"/>
+    <param name="nav_path_frame" value="$(arg nav_frame_id)"/>
+    <param name="nav_reference_frame" value="$(arg nav_reference_frame)"/>
+    <param name="nav_controller" value="$(arg nav_controller)"/>
+    <param name="nav_executor" value="$(arg nav_executor)"/>
+    <!-- Parameters if you are using unicycle executor -->
+    <param name="execution_frequency" value="50.0"/>
+    <param name="execution_avg_velocity" value="0.15"/>
+    <param name="execution_trapezoidal_slope_ratio" value="0.05"/>
+  </node>
+  <!-- Call plugins for navigation / execution -->
+  <node ns="$(arg robot_name)" name="navigation_interface_node" pkg="navigation_interface" type="navigation_interface_node" respawn="false" output="screen">
+    <param name="robot_name" value="$(arg robot_name)"/>
+    <param name="nav_path_frame" value="$(arg nav_frame_id)"/>
+    <param name="nav_reference_frame" value="$(arg nav_reference_frame)"/>
+    <param name="nav_interface" value="$(arg nav_interface)"/>
+    <param name="execution_node" value="navigation_execution_node"/>
+    <param name="path_step" value="0.015"/>
+  </node>
+  <!-- Stand-alone navigation_controls node. Use when you are not intending to use AT/IC and just want to move the robot around -->
+  <group if="$(arg standalone_nav_control_node)">
+    <node name="navigation_control_node" pkg="interactive_controls" type="navigation_control_node" respawn="false" output="screen">
+      <param name="robot_name" value="$(arg robot_name)"/>
+    </node>
+  </group>
+</launch>

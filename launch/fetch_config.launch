@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="use_gui" default="false"/>
+  <arg name="sim" default="true"/>
+  <arg name="paused" default="false"/>
+  <!-- Rviz, only if this launch file is run stand alone -->
+  <arg name="rviz" default="false"/>
+  <arg name="robot_name" default="fetch"/>
+  <arg name="use_namespace" default="false"/>
+
+  <!-- Robot Description -->
+  <group if="$(arg use_namespace)">
+    <include file="$(find craftsman_utils)/launch/craftsman_nav.launch">
+      <arg name="robot_name" value="$(arg robot_name)"/>
+      <arg name="use_namespace" value="$(arg use_namespace)"/>
+      <arg name="robot_description_param" value="robot_description"/>
+      <arg name="attach_type" value="planar"/>
+      <arg if="$(arg sim)" name="xacro_path" value="'$(find craftsman_robots)/urdf/fetch/fetch.urdf.xacro'"/>
+      <arg unless="$(arg sim)" name="xacro_path" value="'$(find fetch_gazebo)/robots/fetch.gazebo.xacro'"/>
+      <arg name="urdf_navigation_extras" value="use_namespace:=$(arg use_namespace)
+      robot_namespace:=/$(arg robot_name)"/>
+      <arg name="base_link" value="base_link"/>
+      <arg name="semantic_description_param" value="robot_description_semantic"/>
+      <arg name="srdf_path" value="'$(find craftsman_robots)/config/fetch/fetch.srdf'"/>
+      <arg name="fixed_frame" value="world"/>
+      <arg name="loopback" value="$(arg sim)"/>
+    </include>
+  </group>
+  
+  
+  <group unless="$(arg use_namespace)">
+    <include file="$(find craftsman_utils)/launch/craftsman_nav.launch">
+      <arg name="robot_name" value="$(arg robot_name)"/>
+      <arg name="use_namespace" value="false"/>
+      <arg name="robot_description_param" value="robot_description"/>
+      <arg name="attach_type" value="planar"/>
+      <arg if="$(arg sim)" name="xacro_path" value="'$(find craftsman_robots)/urdf/fetch/fetch.urdf.xacro'"/>
+      <arg unless="$(arg sim)" name="xacro_path" value="'$(find fetch_gazebo)/robots/fetch.gazebo.xacro'"/>
+      <arg name="urdf_navigation_extras" value="use_namespace:=$(arg use_namespace)
+      robot_namespace:=/"/>
+      <arg name="base_link" value="base_link"/>
+      <arg name="semantic_description_param" value="robot_description_semantic"/>
+      <arg name="srdf_path" value="'$(find craftsman_robots)/config/fetch/fetch.srdf'"/>
+      <arg name="fixed_frame" value="world"/>
+      <arg name="loopback" value="$(arg sim)"/>
+    </include>
+  </group>
+
+
+
+  <!-- *** Gazebo *** -->
+  <group unless="$(arg sim)">
+    <include file="$(find craftsman_robots)/launch/fetch/gazebo/simulation.launch">
+      <arg name="gui" value="true"/>
+      <arg name="use_namespace" value="$(arg use_namespace)"/>
+      <arg name="robot_name" value="$(arg robot_name)"/>
+    </include> 
+  </group>
+
+  <!-- *** Rviz *** -->
+  <group if="$(arg use_namespace)">
+    <group if="$(arg sim)">
+      <param name="use_sim_time" value="false"/>
+      <node ns="$(arg robot_name)" name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false" output="screen">        
+        <param name="robot_description" command="$(find xacro)/xacro '$(find craftsman_robots)/urdf/fetch/fetch.urdf.xacro' use_namespace:=$(arg use_namespace)
+          robot_namespace:=/$(arg robot_name)"/>
+
+        <rosparam param="source_list" subst_value="True">["/$(arg robot_name)/joint_state_controller/joint_command"]</rosparam>
+        <param name="use_gui" value="$(arg use_gui)"/>
+        <rosparam param="rate">100</rosparam>
+        <rosparam param="zeros">{"shoulder_pan_joint": -0.86, "shoulder_lift_joint": -0.48, "upperarm_roll_joint": -1.50, "elbow_flex_joint": -1.57, "forearm_roll_joint": 0.44, "wrist_flex_joint": -0.99, "wrist_roll_joint": 1.65}</rosparam>
+      </node>
+    </group> <!-- end if=sim -->
+
+    <node ns="$(arg robot_name)" name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <param name="publish_frequency" value="100.0"/>
+      <param name="tf_prefix" value="$(arg robot_name)"/>
+      <remap from="joint_states" to="merged_joint_states"/>
+    </node>
+
+    <node ns="$(arg robot_name)" name="relay_nominal" pkg="topic_tools" type="relay" respawn="false" output="screen" args="joint_states nominal/joint_states"/>
+  </group> <!-- end if=use_namespace group -->
+
+  <!-- without ns -->
+  <group unless="$(arg use_namespace)">
+    <group if="$(arg sim)">
+      <param name="use_sim_time" value="false"/>
+
+      <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false" output="screen">
+        <param name="robot_description" command="$(find xacro)/xacro '$(find craftsman_robots)/urdf/fetch/fetch.urdf.xacro' use_namespace:=$(arg use_namespace)
+          robot_namespace:=/"/>
+        
+        <rosparam param="source_list">["/joint_state_controller/joint_command"]</rosparam>
+        <param name="use_gui" value="$(arg use_gui)"/>
+        <rosparam param="rate">100</rosparam>
+        <rosparam param="zeros">{"shoulder_pan_joint": -0.86, "shoulder_lift_joint": -0.48, "upperarm_roll_joint": -1.50, "elbow_flex_joint": -1.57, "forearm_roll_joint": 0.44, "wrist_flex_joint": -0.99, "wrist_roll_joint": 1.65}</rosparam>
+      </node>
+    </group>
+    
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <param name="publish_frequency" value="100.0"/>
+      <remap from="joint_states" to="merged_joint_states"/>
+    </node>
+    
+    <node name="relay_nominal" pkg="topic_tools" type="relay" respawn="false" output="screen" args="/joint_states /nominal/joint_states"/>
+  </group>
+
+</launch>

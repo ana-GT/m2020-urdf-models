@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot_description" default="robot_description"/>
+  <arg name="planner_node" default="false"/>
+  <arg name="planner_name" default="planner_node"/>
+  <arg name="cache" default="true"/>
+  <arg name="at_dbg" default="false"/>
+  <arg name="use_namespace" default="false"/>
+  <arg name="robot_name" default="fetch"/>
+  <!-- the affordance template server node -->
+
+
+  <group if="$(arg use_namespace)">
+    <group unless="$(arg at_dbg)">
+      <node ns="$(arg robot_name)" name="affordance_template_server" pkg="affordance_template_server" type="affordance_template_server" respawn="false" output="screen">
+        <param name="robot_config" value="fetch.yaml"/>
+        <param name="planner_name" value="/$(arg robot_name)/$(arg planner_name)"/>
+        <rosparam param="library_list">["affordance_template_library","craftsman_robots"]</rosparam>
+      </node>
+    </group>
+    <group if="$(arg at_dbg)">
+      <node ns="$(arg robot_name)" name="affordance_template_server" pkg="affordance_template_server" type="affordance_template_server" respawn="false" output="screen" launch-prefix="gdb -ex run --args">
+        <param name="robot_config" value="fetch.yaml"/>
+        <param name="planner_name" value="/$(arg robot_name)/$(arg planner_name)"/>
+        <rosparam param="library_list">["affordance_template_library","craftsman_robots"]</rosparam>
+      </node>
+    </group>
+  </group>
+
+  <group unless="$(arg use_namespace)">
+    <group unless="$(arg at_dbg)">
+      <node name="affordance_template_server" pkg="affordance_template_server" type="affordance_template_server" respawn="false" output="screen">
+        <param name="robot_config" value="fetch.yaml"/>
+        <param name="planner_name" value="$(arg planner_name)"/>
+        <rosparam param="library_list">["affordance_template_library","craftsman_robots"]</rosparam>
+      </node>
+    </group>
+    <group if="$(arg at_dbg)">
+      <node name="affordance_template_server" pkg="affordance_template_server" type="affordance_template_server" respawn="false" output="screen" launch-prefix="gdb -ex run --args">
+        <param name="robot_config" value="fetch.yaml"/>
+        <param name="planner_name" value="$(arg planner_name)"/>
+        <rosparam param="library_list">["affordance_template_library","craftsman_robots"]</rosparam>
+      </node>
+    </group>
+  </group>
+
+
+</launch>
