@@ -4,8 +4,12 @@
   <arg name="rviz" default="true"/>
   <arg name="ats" default="false"/>
   <arg name="robot_name" default="perseverance"/>
+  <arg name="joint_control" default="false"/>
   <arg name="use_namespace" default="false"/>
-
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>    
+  <arg name="yaw" default="0"/>
 
   <!-- Time -->
   <param name="use_sim_time" value="true" unless="$(arg sim)"/>
@@ -14,7 +18,7 @@
   <include file="$(find m2020_urdf_models)/launch/perseverance_config.launch">
     <arg name="sim" value="$(arg sim)"/>
     <arg name="robot_name" value="$(arg robot_name)"/>
-    <!--<arg name="use_namespace" value="$(arg use_namespace)"/>-->
+    <arg name="use_namespace" value="$(arg use_namespace)"/>
   </include>
   
   <!-- Planner Node -->
@@ -28,6 +32,7 @@
   <include file="$(find m2020_urdf_models)/launch/perseverance_controls.launch">
     <arg name="ats" value="$(arg ats)"/>
     <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="joint_control" value="$(arg joint_control)"/>
     <arg name="use_namespace" value="$(arg use_namespace)"/>
   </include>
 
@@ -43,23 +48,22 @@
     <arg name="jnt_cmd" value="joint_state_controller/joint_command"/>
     <arg name="nav_path_step" value="0.015"/>
     <arg name="nav_file_path" value="$(find m2020_urdf_models)/config/perseverance/perseverance_navigation.yaml"/>
+    
+    <arg name="x" value="$(arg x)"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="z" value="$(arg z)"/>    
+    <arg name="yaw" value="$(arg yaw)"/>
+    
   </include>
 
-<!--  <group if="$(arg use_namespace)">
-    <node ns="$(arg robot_name)" name="hack_world_odom_tf_publisher" pkg="tf" type="static_transform_publisher" args=" 0 0 0 0 0 0 /world /$(arg robot_name)/odom 10" respawn="false" output="screen" unless="$(arg sim)"/>
-  </group>
 
-  <group unless="$(arg use_namespace)">
-    <node name="hack_world_odom_tf_publisher" pkg="tf" type="static_transform_publisher" args=" 0 0 0 0 0 0 world odom 10" respawn="false" output="screen" unless="$(arg sim)"/>
-  </group>
--->
   <!-- Display -->
 <!--  <group if="$(arg use_namespace)">
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find craftsman_robots)/rviz/fetch_ns.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance_ns.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
   </group>
 -->
   <group unless="$(arg use_namespace)">
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/rover.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
   </group>
 
 </launch>

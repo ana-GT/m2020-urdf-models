@@ -2,9 +2,12 @@
 
 <robot name="perseverance">
     <group name="arm">
-        <chain base_link="Body_RA_Base" tip_link="Body_RA_Link5" />
+        <chain base_link="Body_RA_Base" tip_link="Frame_DRILL" /> <!-- Body_RA_Link5 -->
     </group>
 
+    <group name="end_tool">
+        <link name="Body_Turret" />
+    </group>
 
     <group_state name="zero" group="arm">
         <joint name="JOINT1_ENC" value="0.0"/>
@@ -14,10 +17,57 @@
         <joint name="JOINT5_ENC" value="0.0" />
     </group_state>
 
+    <group_state name="tucked" group="arm">
+        <joint name="JOINT1_ENC" value="0.096"/>
+        <joint name="JOINT2_ENC" value="-1.44" />
+        <joint name="JOINT3_ENC" value="2.52" />
+        <joint name="JOINT4_ENC" value="0.0" />
+        <joint name="JOINT5_ENC" value="0.0" />
+    </group_state>
+
+    <group_state name="down" group="arm">
+        <joint name="JOINT1_ENC" value="0.0"/>
+        <joint name="JOINT2_ENC" value="-0.032" />
+        <joint name="JOINT3_ENC" value="0.828" />
+        <joint name="JOINT4_ENC" value="0.881" />
+        <joint name="JOINT5_ENC" value="0.0" />
+    </group_state>
+
+    <group_state name="midway" group="arm">
+        <joint name="JOINT1_ENC" value="-1.11"/>
+        <joint name="JOINT2_ENC" value="-1.14" />
+        <joint name="JOINT3_ENC" value="1.41" />
+        <joint name="JOINT4_ENC" value="0.88" />
+        <joint name="JOINT5_ENC" value="0.0" />
+    </group_state>
+
+
+    <group_state name="down_left" group="arm">
+        <joint name="JOINT1_ENC" value="-1.07"/>
+        <joint name="JOINT2_ENC" value="-0.204" />
+        <joint name="JOINT3_ENC" value="0.92" />
+        <joint name="JOINT4_ENC" value="0.905" />
+        <joint name="JOINT5_ENC" value="0.0" />
+    </group_state>
+
+    <group_state name="down_right" group="arm">
+        <joint name="JOINT1_ENC" value="0.76"/>
+        <joint name="JOINT2_ENC" value="-0.204" />
+        <joint name="JOINT3_ENC" value="0.92" />
+        <joint name="JOINT4_ENC" value="0.905" />
+        <joint name="JOINT5_ENC" value="0.0" />
+    </group_state>
+
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="end_tool_ee" parent_link="Body_RA_Link5" group="end_tool" parent_group="arm" />
+
 
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
-<!--    <disable_collisions link1="base_link" link2="bellows_link" reason="Default" />
-    <disable_collisions link1="base_link" link2="bellows_link2" reason="Default" />
-    <disable_collisions link1="base_link" link2="estop_link" reason="Adjacent" />
--->
+    <disable_collisions link1="Body_Chassis" link2="Body_RA_Link1" reason="Default" />
+    <disable_collisions link1="Body_RA_Link1" link2="Body_RA_Link2" reason="Adjacent" />
+    <disable_collisions link1="Body_RA_Link2" link2="Body_RA_Link3" reason="Adjacent" />
+    <disable_collisions link1="Body_RA_Link3" link2="Body_RA_Link4" reason="Adjacent" />
+    <disable_collisions link1="Body_RA_Link4" link2="Body_RA_Link5" reason="Adjacent" /> 
+    <disable_collisions link1="Body_RA_Link5" link2="Body_Turret" reason="Adjacent" /> 
+           
 </robot>

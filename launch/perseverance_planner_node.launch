@@ -33,7 +33,7 @@
           <param name="robot_name" value="$(arg robot_name)"/>
           <param name="planner_plugin" value="$(arg planner_plugin)"/>      
           <param name="execution_plugin" value="basic_executors::JointStateExecutor"/>
-          <param name="param/execution_speed_scalar" value="0.25"/>
+          <param name="param/execution_speed_scalar" value="0.5"/>
           <param name="publish_collision_object" value="true"/>
           <remap from="joint_states" to="joint_states"/>
           <param name="use_namespace" value="$(arg use_namespace)"/>

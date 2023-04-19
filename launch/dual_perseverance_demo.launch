@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="sim" default="true"/>
+  <arg name="rviz" default="true"/>
+
+  <arg name="x_1" default="-1.0"/>
+  <arg name="y_1" default="2.0"/>
+  <arg name="z_1" default="0.0"/>
+  <arg name="yaw_1" default="-1.0"/>      
+
+  <arg name="x_2" default="0.0"/>
+  <arg name="y_2" default="-2.0"/>
+  <arg name="z_2" default="0.0"/>
+  <arg name="yaw_2" default="0.7"/>      
+
+  <!-- Craftsman Gui allows you to control either robot -->
+  <param name="show_namespace" value="true"/>
+
+  <!-- Perseverance 1 -->
+  <include file="$(find m2020_urdf_models)/launch/perseverance_demo.launch">
+    <arg name="robot_name" value="perseverance_1"/>
+    <arg name="use_namespace" value="true"/>
+    <arg name="sim" value="$(arg sim)"/>
+    <arg name="rviz" value="false"/>
+    <arg name="x" value="$(arg x_1)"/>
+    <arg name="y" value="$(arg y_1)"/>
+    <arg name="z" value="$(arg z_1)"/>
+    <arg name="yaw" value="$(arg yaw_1)"/>            
+  </include>
+
+  <!-- Perseverance 2 -->
+  <include file="$(find m2020_urdf_models)/launch/perseverance_demo.launch">
+    <arg name="robot_name" value="perseverance_2"/>
+    <arg name="use_namespace" value="true"/>
+    <arg name="sim" value="$(arg sim)"/>
+    <arg name="rviz" value="false"/>
+    <arg name="x" value="$(arg x_2)"/>
+    <arg name="y" value="$(arg y_2)"/>
+    <arg name="z" value="$(arg z_2)"/>
+    <arg name="yaw" value="$(arg yaw_2)"/>            
+  </include>
+
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/dual_perseverance.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
+ 
+</launch>

@@ -27,6 +27,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/CHASSIS.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="CollGeom_CHASSIS">
+			<origin xyz="0.09002 0 -1.13338" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/CHASSIS.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_MHS_DebrisShield">
 		<inertial>
@@ -107,6 +113,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_LeftRear.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Wheel_LeftRear">
+			<origin xyz="1.165 1.0625 -0.8705" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_LeftRear.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_WheelLeftMiddle">
 		<inertial>
@@ -120,6 +132,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_LeftMiddle.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Wheel_LeftMiddle">
+			<origin xyz="0.09002 1.1845 -0.8705" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_LeftMiddle.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_SteerLeftFront">
 		<inertial>
@@ -146,6 +164,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_LeftFront.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Wheel_LeftFront">
+			<origin xyz="-1.095 1.0625 -0.8705" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_LeftFront.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_RockerRight">
 		<inertial>
@@ -159,6 +183,13 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Right_Rocker.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Right_Rocker">
+			<origin xyz="-0.214 -0.79959 -0.2405" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Right_Rocker.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>
+
 	</link>
 	<link name="Body_BogieRight">
 		<inertial>
@@ -172,6 +203,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Right_Bogie.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Right_Bogie">
+			<origin xyz="0.54 -0.91959 -0.4705" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Right_Bogie.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_SteerRightRear">
 		<inertial>
@@ -198,6 +235,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_RightRear.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Wheel_RightRear">
+			<origin xyz="1.165 -1.0625 -0.8705" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_RightRear.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_WheelRightMiddle">
 		<inertial>
@@ -211,6 +254,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_RightMiddle.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Wheel_RightMiddle">
+			<origin xyz="0.09002 -1.1845 -0.8705" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_RightMiddle.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_SteerRightFront">
 		<inertial>
@@ -237,6 +286,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_RightFront.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Wheel_RightFront">
+			<origin xyz="-1.095 -1.0625 -0.8705" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_RightFront.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_RSM_AZ">
 		<inertial>
@@ -309,6 +364,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_1.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>		
+		<collision name="ColGeom_Arm_LINK_1">
+			<origin xyz="-1.1756 0.4515 -0.3116" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_1.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>				
 	</link>
 	<link name="Body_RA_Link2">
 		<inertial>
@@ -322,6 +383,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_2.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Arm_LINK_2">
+			<origin xyz="-1.3416 0.4515 -0.3116" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_2.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_RA_Link3">
 		<inertial>
@@ -335,6 +402,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_3.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Arm_LINK_3">
+			<origin xyz="-2.161 0.4515 -0.3116" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_3.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_RA_Link4">
 		<inertial>
@@ -348,6 +421,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_4.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Arm_LINK_4">
+			<origin xyz="-2.9143 0.4515 -0.3116" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_4.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_RA_Link5">
 		<inertial>
@@ -361,6 +440,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_5.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="CollGeom_Arm_LINK_5">
+			<origin xyz="-2.7386 0.2724 -0.3116" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_5.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_Turret">
 		<inertial>
@@ -374,6 +459,12 @@
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Turret.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_Turret">
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/Turret.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_CorerFeed">
 		<inertial>
