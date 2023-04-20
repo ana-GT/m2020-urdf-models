@@ -6,12 +6,15 @@
   <arg name="x_1" default="-1.0"/>
   <arg name="y_1" default="2.0"/>
   <arg name="z_1" default="0.0"/>
-  <arg name="yaw_1" default="-1.0"/>      
+  <arg name="yaw_1" default="-0.6"/>      
 
   <arg name="x_2" default="0.0"/>
-  <arg name="y_2" default="-2.0"/>
+  <arg name="y_2" default="-5.0"/>
   <arg name="z_2" default="0.0"/>
-  <arg name="yaw_2" default="0.7"/>      
+  <arg name="yaw_2" default="0.3"/>      
+
+  <arg name="default_nav_planner" default="plummrs_navigation_tools::Planar2DPlumNavPlanner"/>
+  <arg name="default_nav_executor" default="plummrs_navigation_tools::Baseline3DExecutor"/>
 
   <!-- Craftsman Gui allows you to control either robot -->
   <param name="show_namespace" value="true"/>
@@ -29,7 +32,9 @@
     <arg name="x" value="$(arg x_1)"/>
     <arg name="y" value="$(arg y_1)"/>
     <arg name="z" value="$(arg z_1)"/>
-    <arg name="yaw" value="$(arg yaw_1)"/>            
+    <arg name="yaw" value="$(arg yaw_1)"/>    
+    <arg name="default_nav_planner" default="$(arg default_nav_planner)"/>
+    <arg name="default_nav_executor" default="$(arg default_nav_executor)"/>            
   </include>
 
   <!-- Perseverance 2 -->
@@ -42,6 +47,8 @@
     <arg name="y" value="$(arg y_2)"/>
     <arg name="z" value="$(arg z_2)"/>
     <arg name="yaw" value="$(arg yaw_2)"/>            
+    <arg name="default_nav_planner" default="$(arg default_nav_planner)"/>
+    <arg name="default_nav_executor" default="$(arg default_nav_executor)"/>            
   </include>
 
 
