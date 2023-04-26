@@ -8,8 +8,8 @@
   <arg name="nav_path_step" default="0.015"/>
   <arg name="nav_file_path" default=""/>
 
-  <arg name="default_nav_planner" default="plummrs_navigation_tools::Planar2DNavPlanner"/>
-  <arg name="default_nav_executor" default="plummrs_navigation_tools::Baseline3DExecutor"/>
+  <arg name="default_nav_planner" default="craftsman_navigation_tools::Planar2DNavPlanner"/>
+  <arg name="default_nav_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
 
   <!-- Simulate robot starting at a random pose in Rviz -->
   <arg name="x" default="0"/>

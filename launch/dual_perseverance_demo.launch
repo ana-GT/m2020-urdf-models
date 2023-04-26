@@ -13,8 +13,8 @@
   <arg name="z_2" default="0.0"/>
   <arg name="yaw_2" default="0.3"/>      
 
-  <arg name="default_nav_planner" default="plummrs_navigation_tools::Planar2DPlumNavPlanner"/>
-  <arg name="default_nav_executor" default="plummrs_navigation_tools::Baseline3DExecutor"/>
+  <arg name="default_nav_planner" default="craftsman_navigation_tools::Planar2DPlumNavPlanner"/>
+  <arg name="default_nav_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
 
   <!-- Craftsman Gui allows you to control either robot -->
   <param name="show_namespace" value="true"/>
