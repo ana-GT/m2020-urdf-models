@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="sim" default="true"/>
+  <arg name="rviz" default="false"/>
+  <arg name="robot_name" default="ingenuity"/>
+  <arg name="use_namespace" default="false"/>
+
+  <!-- *** No namespace *** -->  
+  <group unless="$(arg use_namespace)">
+
+    <param name="robot_description" command="$(find xacro)/xacro '$(find m2020_urdf_models)/urdf/mhs.urdf.xacro'"/>  
+    <param name="robot_description_semantic" textfile="$(find m2020_urdf_models)/config/ingenuity/ingenuity.srdf"/>
+
+    <group if="$(arg sim)">
+      
+      <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false" output="screen">
+        <remap from="robot_description" to="robot_description"/>
+        <rosparam param="source_list">["joint_state_controller/joint_command"]</rosparam>
+        <param name="use_gui" value="false"/>
+        <rosparam param="rate">100</rosparam>
+        <remap from="joint_states" to="joint_states"/>
+        <param name="zeros/JOINT1_ENC" value="0.096"/> <!-- 0.8 -->
+        <param name="zeros/JOINT2_ENC" value="-1.44"/> <!-- -1.0 -->
+        <param name="zeros/JOINT3_ENC" value="2.52"/> <!-- 1.0 -->
+      </node>
+
+      <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+    </group>
+  
+  </group>
+
+  <!-- *** With namespace *** -->
+  <group if="$(arg use_namespace)" ns="$(arg robot_name)">
+
+    <param name="robot_description" command="$(find xacro)/xacro '$(find m2020_urdf_models)/urdf/mhs.urdf.xacro'"/>  
+    <param name="robot_description_semantic" textfile="$(find m2020_urdf_models)/config/ingenuity/ingenuity.srdf"/>
+
+    <group if="$(arg sim)">
+      
+      <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false" output="screen">
+        <remap from="robot_description" to="robot_description"/>
+        <rosparam param="source_list">["joint_state_controller/joint_command"]</rosparam>
+        <param name="use_gui" value="false"/>
+        <rosparam param="rate">100</rosparam>
+        <remap from="joint_states" to="joint_states"/>
+        <param name="zeros/JOINT1_ENC" value="0.096"/> <!-- 0.8 -->
+        <param name="zeros/JOINT2_ENC" value="-1.44"/> <!-- -1.0 -->
+        <param name="zeros/JOINT3_ENC" value="2.52"/> <!-- 1.0 -->
+      </node>
+
+      <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+        <param name="tf_prefix" value="$(arg robot_name)"/>
+      </node>
+      
+    </group>
+  
+  </group>
+
+  
+  <!-- Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/ingenuity.rviz" respawn="false" output="screen" if="$(arg rviz)"/>  
+  
+</launch>

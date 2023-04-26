@@ -2,7 +2,10 @@
 <!-- This file was generated automatically. [2020_07_14_13_00_00] -->
 <!-- [Tool url: git@github.jpl.nasa.gov:CR/rst.git, branch: dev/working, commit_hash: c6befd6c, commit_time: 2020-07-13 19:17:50 -0700] -->
 
-<robot name="ingenuity">
+<robot name="ingenuity" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="leg_joint_vel" value="0.2" /> <!-- original value: 1.79769e+308 . TRACLabs edit --> 
+
 	<link name="root">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -154,7 +157,7 @@
 		<parent link="Body_MHS_MainBody_v16"/>
 		<child link="Body_Joint_Leg02_Axis"/>
 		<axis xyz="-1 0 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="${leg_joint_vel}"/>
 	</joint>
 	<joint name="MHS_Leg02_v16" type="fixed">
 		<origin xyz="0.0544521 0.0879744 -0.0630787" rpy="1.11631e-09 0.722567 -0.0383972"/>
@@ -166,7 +169,7 @@
 		<parent link="Body_MHS_MainBody_v16"/>
 		<child link="Body_Joint_Leg01_Axis"/>
 		<axis xyz="-1 0 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="${leg_joint_vel}"/>
 	</joint>
 	<joint name="MHS_Leg01_v16" type="fixed">
 		<origin xyz="-0.0239246 0.110467 -0.0439815" rpy="-5.70219e-08 -0.404917 -0.439824"/>
@@ -178,7 +181,7 @@
 		<parent link="Body_MHS_MainBody_v16"/>
 		<child link="Body_Joint_Leg03_Axis"/>
 		<axis xyz="-1 0 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="${leg_joint_vel}"/>
 	</joint>
 	<joint name="MHS_Leg03_v16" type="fixed">
 		<origin xyz="0.0544521 -0.0879744 -0.0630787" rpy="9.26579e-09 0.722567 0.0383972"/>
@@ -190,14 +193,14 @@
 		<parent link="Body_MHS_MainBody_v16"/>
 		<child link="Body_Joint_Leg04_Axis"/>
 		<axis xyz="-1 0 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="${leg_joint_vel}"/>
 	</joint>
 	<joint name="MHS_Leg04_v16" type="fixed">
 		<origin xyz="-0.032699 -0.112619 -0.0310971" rpy="-0.175269 -0.428359 0.402991"/>
 		<parent link="Body_Joint_Leg04_Axis"/>
 		<child link="Body_MHS_Leg04_v16"/>
 	</joint>
-	<joint name="MHS_NAVCAM">
+	<joint name="MHS_NAVCAM" type="fixed"> <!-- TRACLabs note: Added type=fixed to the original, which didn't have a type -->
 		<origin xyz="0.0 0.0616891 0.13743" rpy="-0.0027478 0.0580433 -1.57391594"/>
 		<parent link="Body_MHS_MainBody_v16"/>
 		<child link="Frame_MHS_NAVCAM"/>

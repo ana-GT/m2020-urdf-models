@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot_name" default="perseverance"/>
+  <arg name="planner_name" default="planner_node"/>
+  <arg name="joint_control" default="false"/>
+  <arg name="use_namespace" default="false"/>
+
+
+  <group if="$(arg use_namespace)">
+    <rosparam command="load" file="$(find interactive_controls)/config/default_tolerances.yaml" ns="$(arg robot_name)"/>
+
+    <node ns="$(arg robot_name)" name="interactive_controls" pkg="interactive_controls" type="interactive_controls" respawn="false" output="screen">
+      <param name="limits_param" value="joint_limits"/>
+      <param name="robot_name" value="$(arg robot_name)"/>
+      <param name="planner_name" value="/$(arg robot_name)/planner_node"/>
+      <param name="arm/marker_scale" value="0.35"/>
+      <param name="joint_control" value="$(arg joint_control)"/>
+      <rosparam command="load" file="$(find m2020_urdf_models)/config/perseverance/perseverance_controls.yaml"/>
+      <param name="use_namespace" value="$(arg use_namespace)"/>
+    </node>
+    
+    <!-- Set which joint controls you want to visualize. Default all of them -->
+    <group if="$(arg joint_control)">
+      <include file="$(find interactive_controls)/launch/joint_control.launch"> 
+        <arg name="topics" value="/$(arg robot_name)/arm"/>
+        <arg name="base_frame" value="/$(arg robot_name)/base_footprint"/>
+      </include>
+    </group>
+  </group>
+  
+  <group unless="$(arg use_namespace)">
+    <rosparam command="load" file="$(find interactive_controls)/config/default_tolerances.yaml"/>
+    <node name="interactive_controls" pkg="interactive_controls" type="interactive_controls" respawn="false" output="screen">
+      <param name="robot_name" value="$(arg robot_name)"/>
+      <param name="planner_name" value="planner_node"/>
+      <!-- <param name="arm/marker_scale" value="0.15"/> -->
+      <!-- <param name="craftsman_navigation/marker_scale" value="0.35"/> -->
+      <param name="arm/marker_scale" value="0.35"/>
+
+      <param name="joint_control" value="$(arg joint_control)"/>
+      <rosparam command="load" file="$(find m2020_urdf_models)/config/perseverance/perseverance_controls.yaml"/>
+      <param name="use_namespace" value="$(arg use_namespace)"/>
+    </node>
+
+    <!-- Set which joint controls you want to visualize. Default all of them -->
+    <group if="$(arg joint_control)">
+      <include file="$(find interactive_controls)/launch/joint_control.launch"> 
+        <arg name="topics" value="arm"/>
+        <arg name="base_frame" value="base_footprint"/>
+      </include>
+    </group>
+  </group> <!-- end unless=use_namespace group -->
+
+
+</launch>

@@ -5,13 +5,15 @@
 
   <arg name="x_1" default="-1.0"/>
   <arg name="y_1" default="2.0"/>
-  <arg name="z_1" default="0.0"/>
-  <arg name="yaw_1" default="-0.6"/>      
+  <arg name="z_1" default="2.0"/>
+  <arg name="yaw_1" default="-0.4"/>      
+  <arg name="roll_1" default="3.1416"/>   
 
   <arg name="x_2" default="0.0"/>
-  <arg name="y_2" default="-5.0"/>
-  <arg name="z_2" default="0.0"/>
+  <arg name="y_2" default="-1.0"/>
+  <arg name="z_2" default="2.0"/>
   <arg name="yaw_2" default="0.3"/>      
+  <arg name="roll_2" default="3.1416"/>   
 
   <arg name="default_nav_planner" default="craftsman_navigation_tools::Planar2DPlumNavPlanner"/>
   <arg name="default_nav_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
@@ -23,9 +25,9 @@
   <include file="$(find m2020_urdf_models)/launch/simple_ground_display.launch"/>
 
 
-  <!-- Perseverance 1 -->
-  <include file="$(find m2020_urdf_models)/launch/perseverance/perseverance_demo.launch">
-    <arg name="robot_name" value="perseverance_1"/>
+  <!-- ingenuity 1 -->
+  <include file="$(find m2020_urdf_models)/launch/ingenuity/ingenuity_demo.launch">
+    <arg name="robot_name" value="ingenuity_1"/>
     <arg name="use_namespace" value="true"/>
     <arg name="sim" value="$(arg sim)"/>
     <arg name="rviz" value="false"/>
@@ -33,25 +35,27 @@
     <arg name="y" value="$(arg y_1)"/>
     <arg name="z" value="$(arg z_1)"/>
     <arg name="yaw" value="$(arg yaw_1)"/>    
+    <arg name="roll" value="$(arg roll_1)"/>                
     <arg name="default_nav_planner" default="$(arg default_nav_planner)"/>
     <arg name="default_nav_executor" default="$(arg default_nav_executor)"/>            
   </include>
 
-  <!-- Perseverance 2 -->
-  <include file="$(find m2020_urdf_models)/launch/perseverance/perseverance_demo.launch">
-    <arg name="robot_name" value="perseverance_2"/>
+  <!-- ingenuity 2 -->
+  <include file="$(find m2020_urdf_models)/launch/ingenuity/ingenuity_demo.launch">
+    <arg name="robot_name" value="ingenuity_2"/>
     <arg name="use_namespace" value="true"/>
     <arg name="sim" value="$(arg sim)"/>
     <arg name="rviz" value="false"/>
     <arg name="x" value="$(arg x_2)"/>
     <arg name="y" value="$(arg y_2)"/>
     <arg name="z" value="$(arg z_2)"/>
-    <arg name="yaw" value="$(arg yaw_2)"/>            
+    <arg name="yaw" value="$(arg yaw_2)"/>    
+    <arg name="roll" value="$(arg roll_2)"/>                
     <arg name="default_nav_planner" default="$(arg default_nav_planner)"/>
     <arg name="default_nav_executor" default="$(arg default_nav_executor)"/>            
   </include>
 
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/dual_perseverance.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/dual_ingenuity.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
  
 </launch>

@@ -1,0 +1,6 @@
+joint_limits:
+
+  default_thresholds:
+    starting_error: 0.10
+    stopping_error: 0.10
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+
+<robot name="ingenuity">
+
+    <group name="legs">
+        <!--<link name="Body_MHS_MainBody_v16"/>-->
+        <joint name="Joint_Leg01_Axis" />
+        <joint name="Joint_Leg02_Axis" />
+        <joint name="Joint_Leg03_Axis" />
+        <joint name="Joint_Leg04_Axis" />
+    </group>
+
+    <group_state name="legs_zero" group="legs">
+      <joint name="Joint_Leg01_Axis" value="0.0"/>
+      <joint name="Joint_Leg02_Axis" value="0.0"/>
+      <joint name="Joint_Leg03_Axis" value="0.0"/>
+      <joint name="Joint_Leg04_Axis" value="0.0"/>            
+    </group_state>
+
+    <group_state name="legs_right" group="legs">
+      <joint name="Joint_Leg01_Axis" value="0.5"/>
+      <joint name="Joint_Leg02_Axis" value="0.5"/>
+      <joint name="Joint_Leg03_Axis" value="0.5"/>
+      <joint name="Joint_Leg04_Axis" value="0.5"/>            
+    </group_state>
+
+
+    <group_state name="legs_left" group="legs">
+      <joint name="Joint_Leg01_Axis" value="-0.5"/>
+      <joint name="Joint_Leg02_Axis" value="-0.5"/>
+      <joint name="Joint_Leg03_Axis" value="-0.5"/>
+      <joint name="Joint_Leg04_Axis" value="-0.5"/>            
+    </group_state>
+
+
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <!--<end_effector name="end_tool_ee" parent_link="Body_RA_Link5" group="end_tool" parent_group="arm" />-->
+
+
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="Body_MHS_MainBody_v16" link2="Body_MHS_Leg01_v16" reason="Default" />
+    <disable_collisions link1="Body_MHS_MainBody_v16" link2="Body_MHS_Leg02_v16" reason="Default" />
+    <disable_collisions link1="Body_MHS_MainBody_v16" link2="Body_MHS_Leg03_v16" reason="Default" />
+    <disable_collisions link1="Body_MHS_MainBody_v16" link2="Body_MHS_Leg04_v16" reason="Default" />                   
+</robot>
