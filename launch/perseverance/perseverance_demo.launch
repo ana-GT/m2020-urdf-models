@@ -10,8 +10,8 @@
   <arg name="z" default="0"/>    
   <arg name="yaw" default="0"/>
 
-  <arg name="default_nav_planner" default="craftsman_navigation_tools::Planar2DNavPlanner"/>
-  <arg name="default_nav_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
+  <arg name="nav_default_planner" default="craftsman_navigation_tools::PlanarNavigationPlanner"/>
+  <arg name="nav_default_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
 
   <!-- Time -->
   <param name="use_sim_time" value="true" unless="$(arg sim)"/>
@@ -44,8 +44,8 @@
     <arg name="rviz_sim" value="$(arg sim)"/>
     <arg name="nav_controller" value="mobile_base_controller/cmd_vel"/>
     <!-- Note: Commented out till PR for craftsman_navigation_tools is merged -->
-    <!--<arg name="default_nav_planner" value="$(arg default_nav_planner)"/>
-    <arg name="default_nav_executor" value="$(arg default_nav_executor)"/>--> 
+    <!--<arg name="nav_default_planner" value="$(arg nav_default_planner)"/>
+    <arg name="nav_default_executor" value="$(arg nav_default_executor)"/>--> 
 
     <arg name="nav_path_step" value="0.015"/>
     <arg name="nav_file_path" value="$(find m2020_urdf_models)/config/perseverance/perseverance_navigation.yaml"/>

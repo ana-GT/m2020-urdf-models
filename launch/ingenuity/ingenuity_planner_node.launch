@@ -10,12 +10,13 @@
   <arg name="predictive_display" default="true"/>
   <arg name="planner_plugin" default="tracik_planner::TracIKPlanner"/>
   <arg name="use_namespace" default="false"/>
+  <arg name="robot_frame" default="root"/>
 
   <group if="$(arg use_namespace)">
     <group ns="$(arg robot_name)">
       <!-- the display -->
       <include if="$(arg predictive_display)" file="$(find planner_viz)/launch/display_plan.launch">
-        <arg name="base_frame" value="base_footprint"/>
+        <arg name="base_frame" value="$(arg robot_frame)"/>
         <arg name="robot_name" value="$(arg robot_name)" />
         <arg name="joint_state_topic" value="/$(arg robot_name)/joint_states"/>
       </include>
@@ -60,7 +61,7 @@
   <group unless="$(arg use_namespace)">
     <!-- the display -->
     <include if="$(arg predictive_display)" file="$(find planner_viz)/launch/display_plan.launch">
-      <arg name="base_frame" value="base_footprint"/>
+      <arg name="base_frame" value="$(arg robot_frame)"/>
       <arg name="joint_state_topic" value="/joint_states"/>
     </include>
 

@@ -71,6 +71,12 @@
 				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_Leg02_v16.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_MHS_Leg02_v16">
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_Leg02_v16.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_Joint_Leg01_Axis">
 		<inertial>
@@ -91,6 +97,12 @@
 				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_Leg01_v16.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_MHS_Leg01_v16">
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_Leg01_v16.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_Joint_Leg03_Axis">
 		<inertial>
@@ -111,6 +123,12 @@
 				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_Leg03_v16.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_MHS_Leg03_v16">
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_Leg03_v16.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Body_Joint_Leg04_Axis">
 		<inertial>
@@ -131,6 +149,12 @@
 				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_Leg04_v16.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
+		<collision name="ColGeom_MHS_Leg04_v16">
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_Leg04_v16.dae" scale="1 1 1"/>
+			</geometry>
+		</collision>		
 	</link>
 	<link name="Frame_MHS_NAVCAM"></link>
 	<joint name="MHS_MainBody_v16" type="fixed">

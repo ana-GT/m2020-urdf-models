@@ -13,8 +13,8 @@
   <arg name="z_2" default="0.0"/>
   <arg name="yaw_2" default="0.3"/>      
 
-  <arg name="default_nav_planner" default="craftsman_navigation_tools::Planar2DPlumNavPlanner"/>
-  <arg name="default_nav_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
+  <arg name="nav_default_planner" default="craftsman_navigation_tools::PlanarNavigationPlanner"/>
+  <arg name="nav_default_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
 
   <!-- Craftsman Gui allows you to control either robot -->
   <param name="show_namespace" value="true"/>
@@ -33,8 +33,8 @@
     <arg name="y" value="$(arg y_1)"/>
     <arg name="z" value="$(arg z_1)"/>
     <arg name="yaw" value="$(arg yaw_1)"/>    
-    <arg name="default_nav_planner" default="$(arg default_nav_planner)"/>
-    <arg name="default_nav_executor" default="$(arg default_nav_executor)"/>            
+    <arg name="nav_default_planner" default="$(arg nav_default_planner)"/>
+    <arg name="nav_default_executor" default="$(arg nav_default_executor)"/>            
   </include>
 
   <!-- Perseverance 2 -->
@@ -47,8 +47,8 @@
     <arg name="y" value="$(arg y_2)"/>
     <arg name="z" value="$(arg z_2)"/>
     <arg name="yaw" value="$(arg yaw_2)"/>            
-    <arg name="default_nav_planner" default="$(arg default_nav_planner)"/>
-    <arg name="default_nav_executor" default="$(arg default_nav_executor)"/>            
+    <arg name="nav_default_planner" default="$(arg nav_default_planner)"/>
+    <arg name="nav_default_executor" default="$(arg nav_default_executor)"/>            
   </include>
 
 

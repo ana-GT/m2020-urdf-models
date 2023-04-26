@@ -198,7 +198,7 @@ Visualization Manager:
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 238; 238; 236
+    Background Color: 46; 52; 54
     Default Light: true
     Fixed Frame: world
     Frame Rate: 30
@@ -240,9 +240,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4252035617828369
+      Pitch: 0.4752035140991211
       Target Frame: <Fixed Frame>
-      Yaw: 0.7204124927520752
+      Yaw: 0.9704103469848633
     Saved: ~
 Window Geometry:
   Displays:
