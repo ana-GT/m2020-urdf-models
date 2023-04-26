@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="sim" default="true"/>
+  <arg name="rviz" default="true"/>
+  <!-- Perseverance -->
+  <arg name="x_1" default="-1.0"/>
+  <arg name="y_1" default="2.0"/>
+  <arg name="z_1" default="0.0"/>
+  <arg name="yaw_1" default="-0.6"/>      
+  <!-- Ingenuity -->
+  <arg name="x_2" default="0.0"/>
+  <arg name="y_2" default="-3.0"/>
+  <arg name="z_2" default="2.0"/>
+  <arg name="yaw_2" default="0.3"/>      
+
+  <arg name="default_nav_2d_planner" default="craftsman_navigation_tools::Planar2DPlumNavPlanner"/>
+  <arg name="default_nav_2d_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
+
+  <!-- Craftsman Gui allows you to control either robot -->
+  <param name="show_namespace" value="true"/>
+
+  <!-- Ground -->
+  <include file="$(find m2020_urdf_models)/launch/simple_ground_display.launch"/>
+
+
+  <!-- Perseverance -->
+  <include file="$(find m2020_urdf_models)/launch/perseverance/perseverance_demo.launch">
+    <arg name="robot_name" value="perseverance"/>
+    <arg name="use_namespace" value="true"/>
+    <arg name="sim" value="$(arg sim)"/>
+    <arg name="rviz" value="false"/>
+    <arg name="x" value="$(arg x_1)"/>
+    <arg name="y" value="$(arg y_1)"/>
+    <arg name="z" value="$(arg z_1)"/>
+    <arg name="yaw" value="$(arg yaw_1)"/>    
+    <arg name="default_nav_planner" default="$(arg default_nav_2d_planner)"/>
+    <arg name="default_nav_executor" default="$(arg default_nav_2d_executor)"/>            
+  </include>
+
+  <!-- Ingenuity -->
+  <include file="$(find m2020_urdf_models)/launch/ingenuity/ingenuity_demo.launch">
+    <arg name="robot_name" value="ingenuity"/>
+    <arg name="use_namespace" value="true"/>
+    <arg name="sim" value="$(arg sim)"/>
+    <arg name="rviz" value="false"/>
+    <arg name="x" value="$(arg x_2)"/>
+    <arg name="y" value="$(arg y_2)"/>
+    <arg name="z" value="$(arg z_2)"/>
+    <arg name="yaw" value="$(arg yaw_2)"/>            
+    <arg name="default_nav_planner" default="$(arg default_nav_2d_planner)"/>
+    <arg name="default_nav_executor" default="$(arg default_nav_2d_executor)"/>            
+  </include>
+
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance_ingenuity.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
+ 
+</launch>
