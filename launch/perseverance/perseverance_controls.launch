@@ -22,7 +22,7 @@
     <!-- Set which joint controls you want to visualize. Default all of them -->
     <group if="$(arg joint_control)">
       <include file="$(find interactive_controls)/launch/joint_control.launch"> 
-        <arg name="topics" value="/$(arg robot_name)/arm"/>
+        <arg name="topics" value="/$(arg robot_name)/arm /$(arg robot_name)/head"/>
         <arg name="base_frame" value="/$(arg robot_name)/base_footprint"/>
       </include>
     </group>
@@ -45,7 +45,7 @@
     <!-- Set which joint controls you want to visualize. Default all of them -->
     <group if="$(arg joint_control)">
       <include file="$(find interactive_controls)/launch/joint_control.launch"> 
-        <arg name="topics" value="arm"/>
+        <arg name="topics" value="arm head"/>
         <arg name="base_frame" value="base_footprint"/>
       </include>
     </group>

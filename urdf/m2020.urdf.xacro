@@ -5,7 +5,8 @@
 <robot name="perseverance" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:property name="arm_joint_vel" value="0.2" /> <!-- original value: 1.79769e+308 -->
-
+  <xacro:property name="head_joint_vel" value="1.0" /> <!-- original value: 1.79769e+308 -->
+  
 	<!--<link name="ground">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -1250,14 +1251,14 @@
 		<parent link="Body_Chassis"/>
 		<child link="Body_RSM_AZ"/>
 		<axis xyz="0 0 1"/>
-		<limit lower="0" upper="6.31809" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit lower="0" upper="6.31809" effort="1.79769e+308" velocity="${head_joint_vel}"/>
 	</joint>
 	<joint name="RSM_EL_ENC" type="revolute">
 		<origin xyz="0 0 0" rpy="3.14159 -1.55334 3.14159"/>
 		<parent link="Body_RSM_AZ"/>
 		<child link="Body_RSM_EL"/>
 		<axis xyz="0 1 0"/>
-		<limit lower="0" upper="3.1765" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit lower="0" upper="3.1765" effort="1.79769e+308" velocity="${head_joint_vel}"/>
 	</joint>
 	<joint name="HGA_AZ" type="revolute">
 		<origin xyz="-0.36998 -0.475 -1.13288" rpy="0 -0 0.436332"/>

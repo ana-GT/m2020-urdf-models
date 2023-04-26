@@ -5,8 +5,8 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Status1
-        - /Rover1/Links1
-        - /Rover1/Links1/Body_MHS_DebrisShield1
+        - /perseverance1/Links1
+        - /perseverance1/Links1/Body_MHS_DebrisShield1
       Splitter Ratio: 0.7558823823928833
     Tree Height: 719
   - Class: rviz/Selection
@@ -555,7 +555,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-      Name: Rover
+      Name: perseverance
       Robot Description: robot_description
       TF Prefix: ""
       Update Interval: 0

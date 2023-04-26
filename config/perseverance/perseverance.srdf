@@ -9,6 +9,32 @@
         <link name="Body_Turret" />
     </group>
 
+    <group name="head">
+      <joint name="RSM_AZ_ENC" />
+      <joint name="RSM_EL_ENC" />      
+    </group>
+    <!-- Limit joints: AZ_ENC: [0, 6.31] EL_ENC: [0, 3.1765]-->
+    <group_state name="head_front" group="head">
+        <joint name="RSM_AZ_ENC" value="3.1416"/>
+        <joint name="RSM_EL_ENC" value="1.5708" />
+    </group_state>
+
+    <group_state name="head_left" group="head">
+        <joint name="RSM_AZ_ENC" value="1.5708"/>
+        <joint name="RSM_EL_ENC" value="1.5709" />
+    </group_state>
+
+    <group_state name="head_right" group="head">
+        <joint name="RSM_AZ_ENC" value="4.72"/>
+        <joint name="RSM_EL_ENC" value="1.5708" />
+    </group_state>
+
+
+    <group_state name="head_zero" group="head">
+        <joint name="RSM_AZ_ENC" value="0.05"/>
+        <joint name="RSM_EL_ENC" value="0.05" />
+    </group_state>
+
     <group_state name="zero" group="arm">
         <joint name="JOINT1_ENC" value="0.0"/>
         <joint name="JOINT2_ENC" value="0.0" />

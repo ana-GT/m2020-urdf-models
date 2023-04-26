@@ -3,5 +3,5 @@ groups :
     - arm
 #  endeffector:
 #    - gripper
-#  joint:
-#    - head
+  joint:
+    - head
