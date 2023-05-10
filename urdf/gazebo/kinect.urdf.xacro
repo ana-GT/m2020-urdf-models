@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<root xmlns:xacro="http://ros.org/wiki/xacro">
+  
+  <xacro:property name="PI" value="3.1415926535897931"/>
+  <xacro:property name="cal_kinect_x" value="0" />
+  <xacro:property name="cal_kinect_y" value="0" />
+  <xacro:property name="cal_kinect_z" value="0.0" />
+  <xacro:property name="cal_kinect_roll" value="0.0" />
+  <xacro:property name="cal_kinect_pitch" value="0.0" />
+  <xacro:property name="cal_kinect_yaw" value="0.0" />
+  
+  <xacro:macro name="kinect" params="prefix parent:='Frame_NCL_FOV' ">
+    
+    <joint name="${prefix}kinect_joint" type="fixed">
+      <!--<origin xyz="0.025 0 0.05" rpy="0 0 0"/>-->
+      <origin xyz="0.0 0 0.0" rpy="0 -1.5708 3.1416"/>
+
+      <parent link="${parent}"/>
+      <child link="${prefix}kinect_link"/>
+    </joint>
+    
+    <link name="${prefix}kinect_link">
+      <inertial>
+        <mass value="0.0001" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="0.001"  ixy="0.0"  ixz="0.0"
+                 iyy="0.001"  iyz="0.0"
+                 izz="0.001" />
+      </inertial>
+      <!--<visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://tracbot_description/meshes/sensors/kinect.dae" />
+        </geometry>
+      </visual>-->
+      <!--<collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://tracbot_description/meshes/sensors/kinect.dae" />
+        </geometry>
+      </collision> -->
+    </link>
+
+    <joint name="${prefix}kinect_optical_joint" type="fixed">
+      <origin xyz="${cal_kinect_x}            ${cal_kinect_y}         ${cal_kinect_z}"
+                rpy="${-PI/2+cal_kinect_roll} ${0.0+cal_kinect_pitch} ${-PI/2+cal_kinect_yaw}" />
+      <parent link="${prefix}kinect_link"/>
+      <child link="${prefix}kinect_optical_frame"/>
+    </joint>
+
+    <link name="${prefix}kinect_optical_frame"/>
+
+  </xacro:macro>
+
+</root>
+

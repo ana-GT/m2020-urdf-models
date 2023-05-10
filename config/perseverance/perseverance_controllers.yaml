@@ -1,0 +1,16 @@
+controller_list:
+  - name: arm_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    joints:
+      - JOINT1_ENC
+      - JOINT2_ENC
+      - JOINT3_ENC
+      - JOINT4_ENC
+      - JOINT5_ENC
+  - name: head_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    joints:
+      - RSM_AZ_ENC
+      - RSM_EL_ENC
