@@ -4,12 +4,57 @@
 <!-- m2020.gazebo.urdf.xacro: File that was vastly modified by TRACLabs to work with Gazebo -->
 <robot name="perseverance" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <!-- TRACLABS NOTES CONVERSION: Commented out: 	<link name="Body_CorerFeed"> CHECK OUT LATER!  -->
+
+  <xacro:include filename="$(find m2020_urdf_models)/urdf/gazebo/m2020.gazebo.component_macros.xacro"/>
+
   <xacro:property name="arm_joint_vel" value="0.2" /> <!-- original value: 1.79769e+308 -->
   <xacro:property name="head_joint_vel" value="1.0" /> <!-- original value: 1.79769e+308 -->
-  <xacro:property name="default_mass" value="1.0" />
+  <xacro:property name="arm_default_effort" value="100.0" /> <!-- original value: 1.79769e+308 -->  
+  <xacro:property name="stabilizer_default_vel" value="0.5"/> <!-- original value: 1.79769e+308 -->
+  <xacro:property name="stabilizer_default_effort" value="50"/> <!-- original value: 1.79769e+308 -->
+
+  <xacro:property name="arm_default_damping" value="1.0"/>
+  <xacro:property name="arm_default_friction" value="10.0"/>   
+  <xacro:property name="default_mass" value="3.0" />
   <xacro:property name="default_ixx" value="0.2" /> 
   <xacro:property name="default_iyy" value="0.2" /> 
   <xacro:property name="default_izz" value="0.2" />    
+
+  <xacro:property name="link4_ixx" value="0.05" />    
+  <xacro:property name="link4_iyy" value="0.05" />    
+  <xacro:property name="link4_izz" value="0.05" />    
+
+  <xacro:property name="link5_ixx" value="0.05" />    
+  <xacro:property name="link5_iyy" value="0.05" />    
+  <xacro:property name="link5_izz" value="0.05" />
+
+  <xacro:property name="stabilizer_mass" value="0.5"/>
+  <xacro:property name="stabilizer_ixx" value="0.01" /> 
+  <xacro:property name="stabilizer_iyy" value="0.01" /> 
+  <xacro:property name="stabilizer_izz" value="0.01" />    
+
+
+  <xacro:property name="cap_mass" value="0.1"/>
+  <xacro:property name="cap_ixx" value="0.005" /> 
+  <xacro:property name="cap_iyy" value="0.005" /> 
+  <xacro:property name="cap_izz" value="0.005" />    
+
+  <xacro:property name="turret_mass" value="1.0"/>
+  <xacro:property name="turret_ixx" value="0.1" /> 
+  <xacro:property name="turret_iyy" value="0.1" /> 
+  <xacro:property name="turret_izz" value="0.1" />    
+
+  <!-- For link with no visual, no collision, just a frame -->
+  <xacro:property name="tiny_mass" value="0.001"/>
+  <xacro:property name="tiny_ixx" value="0.00001" /> 
+  <xacro:property name="tiny_iyy" value="0.00001" /> 
+  <xacro:property name="tiny_izz" value="0.00001" />    
+
+  <xacro:property name="head_damping" value="1.0"/>
+  <xacro:property name="head_friction" value="10.0"/>   
+  <xacro:property name="head_effort" value="100.0" />
+
 
 	<link name="base_footprint"/>
 
@@ -336,7 +381,7 @@
 	</link>
 	<link name="Body_RSM_AZ">
 		<inertial>
-			<origin xyz="-0.714017 -0.559028 0.78589" rpy="0 -0 0"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
 			<mass value="${default_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
@@ -355,7 +400,7 @@
 	</link>
 	<link name="Body_RSM_EL">
 		<inertial>
-			<origin xyz="-0.714017 -0.559028 0.78589" rpy="0 -0 0"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
 			<mass value="${default_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
@@ -411,11 +456,11 @@
 		</collision>		
 	</link>
 	<link name="Body_RA_Base">
-		<!--<inertial>
+		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
-			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
-		</inertial>--> <!-- Commented out TRACLabs-->
+			<mass value="${tiny_mass}"/>
+			<inertia ixx="${tiny_ixx}" ixy="0" ixz="0" iyy="${tiny_iyy}" iyz="0" izz="${tiny_izz}"/>
+		</inertial>
 	</link>
 	<link name="Body_RA_Link1">
 		<inertial>
@@ -438,7 +483,7 @@
 	</link>
 	<link name="Body_RA_Link2">
 		<inertial>
-			<origin xyz="-1.3416 0.4515 -0.3116" rpy="0 -0 0"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
 			<mass value="${default_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
@@ -457,9 +502,9 @@
 	</link>
 	<link name="Body_RA_Link3">
 		<inertial>
-			<origin xyz="-2.161 0.4515 -0.3116" rpy="0 -0 0"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
 			<mass value="${default_mass}"/>
-			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
+			<inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
 		</inertial>
 		<visual name="VisGeom_Arm_LINK_3">
 			<origin xyz="-2.161 0.4515 -0.3116" rpy="0 -0 0"/>
@@ -476,9 +521,9 @@
 	</link>
 	<link name="Body_RA_Link4">
 		<inertial>
-			<origin xyz="-2.9143 0.4515 -0.3116" rpy="0 -0 0"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
 			<mass value="${default_mass}"/>
-			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
+			<inertia ixx="${link4_ixx}" ixy="0" ixz="0" iyy="${link4_iyy}" iyz="0" izz="${link4_izz}"/>
 		</inertial>
 		<visual name="VisGeom_Arm_LINK_4">
 			<origin xyz="-2.9143 0.4515 -0.3116" rpy="0 -0 0"/>
@@ -494,10 +539,10 @@
 		</collision>		
 	</link>
 	<link name="Body_RA_Link5">
-		<inertial>
-			<origin xyz="-2.7386 0.2724 -0.3116" rpy="0 -0 0"/>
+	    <inertial>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<mass value="${default_mass}"/>
-			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
+			<inertia ixx="${link5_ixx}" ixy="0" ixz="0" iyy="${link5_iyy}" iyz="0" izz="${link5_izz}"/>
 		</inertial>
 		<visual name="VisGeom_Arm_LINK_5">
 			<origin xyz="-2.7386 0.2724 -0.3116" rpy="0 -0 0"/>
@@ -510,13 +555,13 @@
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_5.dae" scale="1 1 1"/>
 			</geometry>
-		</collision>		
+		</collision>
 	</link>
 	<link name="Body_Turret">
 		<inertial>
-			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
-			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
+			<mass value="${turret_mass}"/>
+			<inertia ixx="${turret_ixx}" ixy="0" ixz="0" iyy="${turret_iyy}" iyz="0" izz="${turret_izz}"/>
 		</inertial>
 		<visual name="VisGeom_Turret">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -529,7 +574,7 @@
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Turret.dae" scale="1 1 1"/>
 			</geometry>
-		</collision>		
+		</collision>
 	</link>
 	<link name="Body_CorerFeed">
 		<!--<inertial>
@@ -545,12 +590,12 @@
 			</geometry>
 		</visual>
 		-->
-		<visual name="VisGeom_AbradingBit">
+		<!--<visual name="VisGeom_AbradingBit">
 			<origin xyz="0.208499 -5.1e-05 -3.438e-05" rpy="0 -0 0"/>
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/rover/meshes/AbradingBitInTurretAtZeroFeed.dae" scale="1 1 1"/>
 			</geometry>
-		</visual>
+		</visual>--> <!-- Commented out TRACLabs -->
 		<!-- hidden visual element
 		<visual name="VisGeom_CoringBit">
 			<origin xyz="0.208499 -5.1e-05 -3.438e-05" rpy="0 -0 0"/>
@@ -570,9 +615,9 @@
 	</link>
 	<link name="Body_StabilizerFar">
 		<inertial>
-			<origin xyz="-2.5301 0.272349 0.0168656" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
-			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${stabilizer_mass}"/>
+			<inertia ixx="${stabilizer_ixx}" ixy="0" ixz="0" iyy="${stabilizer_iyy}" iyz="0" izz="${stabilizer_izz}"/>	
 		</inertial>
 		<visual name="VisGeom_StabilizerFar">
 			<origin xyz="0.208499 -5.1e-05 -3.438e-05" rpy="0 -0 0"/>
@@ -589,9 +634,9 @@
 	</link>
 	<link name="Body_StabilizerNear">
 		<inertial>
-			<origin xyz="-2.5301 0.272349 0.0168656" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
-			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${stabilizer_mass}"/>
+			<inertia ixx="${stabilizer_ixx}" ixy="0" ixz="0" iyy="${stabilizer_iyy}" iyz="0" izz="${stabilizer_izz}"/>
 		</inertial>
 		<visual name="VisGeom_StabilizerNear">
 			<origin xyz="0.208499 -5.1e-05 -3.438e-05" rpy="0 -0 0"/>
@@ -608,9 +653,9 @@
 	</link>
 	<link name="Body_WATSON_Cap">
 		<inertial>
-			<origin xyz="-2.6025 0.581204 0.0309103" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
-			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${cap_mass}"/>
+			<inertia ixx="${cap_ixx}" ixy="0" ixz="0" iyy="${cap_iyy}" iyz="0" izz="${cap_izz}"/>
 		</inertial>
 		<visual name="VisGeom_WATSON_Cap">
 			<origin xyz="-2.6025 0.581204 0.0309103" rpy="0 -0 0"/>
@@ -627,9 +672,9 @@
 	</link>
 	<link name="Body_SHERLOC_Cap">
 		<inertial>
-			<origin xyz="-2.86084 0.58439 -0.0124626" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
-			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${cap_mass}"/>
+			<inertia ixx="${cap_ixx}" ixy="0" ixz="0" iyy="${cap_iyy}" iyz="0" izz="${cap_izz}"/>
 		</inertial>
 		<visual name="VisGeom_SHERLOC_Cap">
 			<origin xyz="-2.86084 0.58439 -0.0124626" rpy="0 -0 0"/>
@@ -844,21 +889,22 @@
 		<axis xyz="0 0 1"/>
 		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="RF_DRIVE" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="RF_DRIVE" type="fixed"> <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="0 0 0" rpy="0 -0 0"/>
 		<parent link="Body_SteerRightFront"/>
 		<child link="Body_WheelRightFront"/>
 		<axis xyz="0 -1 0"/>
 		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="RSM_AZ_ENC" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="RSM_AZ_ENC" type="revolute">
 		<origin xyz="0.804037 0.559028 -1.91927" rpy="0 -0 3.12414"/>
 		<parent link="Body_Chassis"/>
 		<child link="Body_RSM_AZ"/>
 		<axis xyz="0 0 1"/>
-		<limit lower="0" upper="6.31809" effort="1.79769e+308" velocity="${head_joint_vel}"/>
+		<limit lower="0" upper="6.31809" effort="${head_effort}" velocity="${head_joint_vel}"/>
+		<dynamics damping="${head_damping}" friction="${head_friction}"/>		
 	</joint>
-	<joint name="RSM_EL_ENC" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="RSM_EL_ENC" type="revolute">
 		<origin xyz="0 0 0" rpy="3.14159 -1.55334 3.14159"/>
 		<parent link="Body_RSM_AZ"/>
 		<child link="Body_RSM_EL"/>
@@ -885,75 +931,82 @@
 		<parent link="Body_Chassis"/>
 		<child link="Body_RA_Base"/>
 	</joint>
-	<joint name="JOINT1_ENC" type="fixed"> <!-- TRACLabs Gazebo test hack -->
-		<origin xyz="1.1756 -0.4515 0.3116" rpy="0 -0 0"/>
+	<joint name="JOINT1_ENC" type="revolute">
+		<origin xyz="1.1756 -0.4515 0.3116" rpy="0 0 0"/>
 		<parent link="Body_RA_Base"/>
 		<child link="Body_RA_Link1"/>
 		<axis xyz="0 0 1"/>
-		<limit lower="-3.145" upper="1.592" effort="1.79769e+308" velocity="${arm_joint_vel}"/>
+		<limit lower="-3.145" upper="1.592" effort="${arm_default_effort}" velocity="${arm_joint_vel}"/>
+		<dynamics damping="${arm_default_damping}" friction="${arm_default_friction}"/>		
 	</joint>
-	<joint name="JOINT2_ENC" type="fixed"> <!-- TRACLabs Gazebo test hack -->
-		<origin xyz="0.166 0 0" rpy="0 -0 0"/>
+	<joint name="JOINT2_ENC" type="revolute">
+		<origin xyz="0.166 0 0" rpy="0 0 0"/>
 		<parent link="Body_RA_Link1"/>
 		<child link="Body_RA_Link2"/>
 		<axis xyz="0 -1 0"/>
-		<limit lower="-3.267" upper="0.126" effort="1.79769e+308" velocity="${arm_joint_vel}"/>
+		<limit lower="-3.267" upper="0.126" effort="${arm_default_effort}" velocity="${arm_joint_vel}"/>	
+		<dynamics damping="${arm_default_damping}" friction="${arm_default_friction}"/>
 	</joint>
-	<joint name="JOINT3_ENC" type="fixed"> <!-- TRACLabs Gazebo test hack -->
-		<origin xyz="0.8194 0 0" rpy="0 -0 0"/>
+	<joint name="JOINT3_ENC" type="revolute">
+		<origin xyz="0.8194 0 0" rpy="0 0 0"/>
 		<parent link="Body_RA_Link2"/>
 		<child link="Body_RA_Link3"/>
 		<axis xyz="0 -1 0"/>
-		<limit lower="-2.866" upper="2.866" effort="1.79769e+308" velocity="${arm_joint_vel}"/>
+		<limit lower="-2.866" upper="2.866" effort="${arm_default_effort}" velocity="${arm_joint_vel}"/>
+		<dynamics damping="${arm_default_damping}" friction="${arm_default_friction}"/>		
 	</joint>
-	<joint name="JOINT4_ENC" type="fixed"> <!-- TRACLabs Gazebo test hack -->
-		<origin xyz="0.7533 0 0" rpy="0 -0 0"/>
+	<joint name="JOINT4_ENC" type="revolute">
+		<origin xyz="0.7533 0 0" rpy="0 0 0"/>
 		<parent link="Body_RA_Link3"/>
 		<child link="Body_RA_Link4"/>
 		<axis xyz="0 -1 0"/>
-		<limit lower="-0.178" upper="3.669" effort="1.79769e+308" velocity="${arm_joint_vel}"/>
+		<limit lower="-0.178" upper="3.669" effort="${arm_default_effort}" velocity="${arm_joint_vel}"/>
+		<dynamics damping="${arm_default_damping}" friction="${arm_default_friction}"/>		
 	</joint>
-	<joint name="JOINT5_ENC" type="fixed"> <!-- TRACLabs Gazebo test hack -->
-		<origin xyz="-0.1757 0.1791 0" rpy="0 -0 0"/>
+	<joint name="JOINT5_ENC" type="revolute">
+		<origin xyz="-0.1757 0.1791 0" rpy="0 0 0"/>
 		<parent link="Body_RA_Link4"/>
 		<child link="Body_RA_Link5"/>
 		<axis xyz="0 0 1"/>
-		<limit lower="-0.353" upper="6.636" effort="1.79769e+308" velocity="${arm_joint_vel}"/>
+		<limit lower="-0.353" upper="6.636" effort="${arm_default_effort}" velocity="${arm_joint_vel}"/>
+		<dynamics damping="${arm_default_damping}" friction="${arm_default_friction}"/>		
 	</joint>
 	<joint name="JointTurret" type="fixed">
 		<origin xyz="-2.7386 0.2724 -0.3116" rpy="0 -0 0"/>
 		<parent link="Body_RA_Link5"/>
 		<child link="Body_Turret"/>
 	</joint>
-	<joint name="DRILL_FEED" type="prismatic">
+	<joint name="DRILL_FEED" type="fixed">  <!-- prismatic TRACLabs Gazebo test hack -->
 		<origin xyz="2.5301 -0.272349 -0.0168656" rpy="0 -0 0"/>
 		<parent link="Body_Turret"/>
 		<child link="Body_CorerFeed"/>
 		<axis xyz="1 0 0"/>
 		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="STABILIZER_LOWER" type="prismatic">
+	<joint name="STABILIZER_LOWER" type="fixed">  <!-- prismatic TRACLabs Gazebo test hack -->
 		<origin xyz="2.5301 -0.272349 -0.0168656" rpy="0 -0 0"/>
 		<parent link="Body_Turret"/>
 		<child link="Body_StabilizerFar"/>
 		<axis xyz="-1 0 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="${stabilizer_default_effort}" velocity="${stabilizer_default_vel}"/>
+		<dynamics damping="${arm_default_damping}" friction="${arm_default_friction}"/>				
 	</joint>
-	<joint name="STABILIZER_UPPER" type="prismatic">
+	<joint name="STABILIZER_UPPER" type="fixed"> <!-- prismatic TRACLabs Gazebo test hack -->
 		<origin xyz="2.5301 -0.272349 -0.0168656" rpy="0 -0 0"/>
 		<parent link="Body_Turret"/>
 		<child link="Body_StabilizerNear"/>
 		<axis xyz="-1 0 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="${stabilizer_default_effort}" velocity="${stabilizer_default_vel}"/>
+		<dynamics damping="${arm_default_damping}" friction="${arm_default_friction}"/>				
 	</joint>
-	<joint name="WATSON_CAP_ENC" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="WATSON_CAP_ENC" type="fixed"> <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="2.6025 -0.581204 -0.0309103" rpy="0 -0 0"/>
 		<parent link="Body_Turret"/>
 		<child link="Body_WATSON_Cap"/>
 		<axis xyz="0 0 -1"/>
 		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="SHERLOC_CAP_ENC" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="SHERLOC_CAP_ENC" type="fixed"> <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="2.86084 -0.58439 0.0124626" rpy="0 -0 0"/>
 		<parent link="Body_Turret"/>
 		<child link="Body_SHERLOC_Cap"/>

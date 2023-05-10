@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+
+<robot name="perseverance" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="robot_name" value="perseverance" />
+  
+  <xacro:include filename="$(find m2020_urdf_models)/urdf/m2020.traclabs.urdf.xacro" />
+  <xacro:include filename="$(find m2020_urdf_models)/urdf/gazebo/m2020.gazebo.components.xacro" />
+  <xacro:include filename="$(find m2020_urdf_models)/urdf/gazebo/m2020.gazebo.controllers.xacro" />
+
+</robot>

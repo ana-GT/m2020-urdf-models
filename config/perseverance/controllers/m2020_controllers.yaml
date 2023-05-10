@@ -1,0 +1,77 @@
+# perseverance:
+# Publish all joint states -----------------------------------
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+#mobile_base_controller:
+#  type: "diff_drive_controller/DiffDriveController"
+#  left_wheel: 'left_wheel_joint'
+#  right_wheel: 'right_wheel_joint'
+#  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+#  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+#  base_frame_id: base_footprint 
+#  cmd_vel_timeout: 0.25
+#  enable_odom_tf: false # set to false if perfect odometry is ever enabled. True publishes the tf
+
+arm_controller:
+  type: "effort_controllers/JointTrajectoryController"
+  joints:
+    - JOINT1_ENC
+    - JOINT2_ENC
+    - JOINT3_ENC
+    - JOINT4_ENC
+    - JOINT5_ENC        
+  gains:
+    JOINT1_ENC: {p: 1000.0, d: 10, i: 0, i_clamp: 500.0}
+    JOINT2_ENC: {p: 1000.0, d: 10, i: 0, i_clamp: 500.0}
+    JOINT3_ENC: {p: 5000.0, d: 100, i: 1, i_clamp: 500.0}
+    JOINT4_ENC: {p: 2800.0, d: 10, i: 0, i_clamp: 500.0}
+    JOINT5_ENC: {p: 2000.0, d: 10, i: 0, i_clamp: 500.0}
+  follow_joint_trajectory:
+    joints:
+     - JOINT1_ENC
+     - JOINT2_ENC
+     - JOINT3_ENC
+     - JOINT4_ENC
+     - JOINT5_ENC        
+
+    constraints:
+      goal_time: 10.0
+      JOINT1_ENC:
+        goal: 0.2
+      JOINT2_ENC:
+        goal: 0.2
+      JOINT3_ENC:        
+        goal: 0.2
+      JOINT4_ENC:
+        goal: 0.2
+      JOINT5_ENC:        
+        goal: 0.2
+    state_publish_rate:  25            # Override default
+    action_monitor_rate: 30            # Override default
+    stop_trajectory_duration: 0        # Override default
+
+
+
+head_controller:
+  type: "effort_controllers/JointTrajectoryController"
+  joints:
+    - RSM_AZ_ENC
+    - RSM_EL_ENC
+  gains:
+    RSM_AZ_ENC: {p: 10, d: 4, i: 0, i_clamp: 500.0}
+    RSM_EL_ENC: {p: 10, d: 4, i: 0, i_clamp: 500.0}
+  follow_joint_trajectory:
+    joints:
+      - RSM_AZ_ENC
+      - RSM_EL_ENC
+    constraints:
+      goal_time: 10.0
+      RSM_AZ_ENC:
+        goal: 0.2
+      RSM_EL_ENC:
+        goal: 0.2
+    state_publish_rate:  25            # Override default
+    action_monitor_rate: 30            # Override default
+    stop_trajectory_duration: 0        # Override default

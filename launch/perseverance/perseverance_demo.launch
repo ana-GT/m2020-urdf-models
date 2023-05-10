@@ -17,12 +17,22 @@
   <param name="use_sim_time" value="true" unless="$(arg sim)"/>
   <param name="use_sim_time" value="false" if="$(arg sim)"/>
 
-  <include file="$(find m2020_urdf_models)/launch/perseverance/perseverance_config.launch">
+  <!-- Configuration -->
+  <include file="$(find m2020_urdf_models)/launch/perseverance/perseverance_config.launch" if="$(arg sim)">
     <arg name="sim" value="$(arg sim)"/>
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="use_namespace" value="$(arg use_namespace)"/>
   </include>
-  
+
+  <include file="$(find m2020_urdf_models)/launch/perseverance/perseverance_config_gazebo.launch" unless="$(arg sim)">
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="use_namespace" value="$(arg use_namespace)"/>
+    <arg name="x" value="$(arg x)"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="z" value="$(arg z)"/>        
+  </include>
+
+
   <!-- Planner Node -->
   <include file="$(find m2020_urdf_models)/launch/perseverance/perseverance_planner_node.launch">
     <arg name="sim" value="$(arg sim)"/>
@@ -38,14 +48,13 @@
   </include>
 
   <!-- Navigation -->
-  <include file="$(find craftsman_navigation_tools)/launch/craftsman_navigation_setup.launch">
+  <!--<include file="$(find craftsman_navigation_tools)/launch/craftsman_navigation_setup.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="use_namespace" value="$(arg use_namespace)"/>
     <arg name="rviz_sim" value="$(arg sim)"/>
     <arg name="nav_controller" value="mobile_base_controller/cmd_vel"/>
-    <!-- Note: Commented out till PR for craftsman_navigation_tools is merged -->
-    <!--<arg name="nav_default_planner" value="$(arg nav_default_planner)"/>
-    <arg name="nav_default_executor" value="$(arg nav_default_executor)"/>--> 
+    <arg name="nav_default_planner" value="$(arg nav_default_planner)"/>
+    <arg name="nav_default_executor" value="$(arg nav_default_executor)"/>
 
     <arg name="nav_path_step" value="0.015"/>
     <arg name="nav_file_path" value="$(find m2020_urdf_models)/config/perseverance/perseverance_navigation.yaml"/>
@@ -55,7 +64,7 @@
     <arg name="z" value="$(arg z)"/>    
     <arg name="yaw" value="$(arg yaw)"/>
     
-  </include>
+  </include>-->
 
   <group unless="$(arg use_namespace)">
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
