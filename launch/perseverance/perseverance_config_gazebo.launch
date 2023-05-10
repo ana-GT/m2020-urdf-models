@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="rviz" default="false"/>
+  <arg name="robot_name" default="perseverance"/>
+  <arg name="use_namespace" default="false"/>
+
+  <arg name="x"       default="0"/>
+  <arg name="y"       default="0"/>
+  <arg name="z"       default="2.5"/>
+  <arg name="yaw"     default="0"/>  
+  <arg name="paused" default="true"/>
+  <arg name="gzserver" default="true"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" if="$(arg gzserver)">
+    <!--<arg name="world_name" value="$(arg world)"/>-->
+    <!-- Always start in paused mode, and only unpause when spawning the model -->
+    <arg name="paused" value="$(arg paused)"/>
+    <!--<arg name="gui" value="$(eval not arg('headless'))"/>
+    <arg name="use_sim_time" value="true"/>-->
+  </include>
+
+  <!-- *** No namespace *** -->  
+  <group unless="$(arg use_namespace)">
+
+    <param name="robot_description" command="$(find xacro)/xacro '$(find m2020_urdf_models)/urdf/m2020.gazebo.urdf.xacro'"/>  
+    <param name="robot_description_semantic" textfile="$(find m2020_urdf_models)/config/perseverance/perseverance.srdf"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
+  
+    <node name="$(arg robot_name)_model_spawner"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-x $(arg x)
+                -y $(arg y)
+                -z $(arg z)
+                -Y $(arg yaw)
+                -param robot_description -urdf -model $(arg robot_name) "/> <!-- $(arg initial_joint_positions) -->
+
+  </group>
+
+  <!-- *** With namespace *** -->
+  <group if="$(arg use_namespace)" ns="$(arg robot_name)">
+
+    <param name="robot_description" command="$(find xacro)/xacro '$(find m2020_urdf_models)/urdf/m2020.gazebo.urdf.xacro'"/>  
+    <param name="robot_description_semantic" textfile="$(find m2020_urdf_models)/config/perseverance/perseverance.srdf"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+      <param name="tf_prefix" value="$(arg robot_name)"/>
+    </node>
+      
+  
+  </group>
+
+  
+  <!-- Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance.rviz" respawn="false" output="screen" if="$(arg rviz)"/>  
+  
+</launch>
