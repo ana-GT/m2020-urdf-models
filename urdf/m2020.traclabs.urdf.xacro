@@ -5,8 +5,11 @@
 <robot name="perseverance" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- TRACLABS NOTES CONVERSION: Commented out: 	<link name="Body_CorerFeed"> CHECK OUT LATER!  -->
+  <!-- Set wheel MIDDLE links to be smaller, so they don't touch the floor (so we only use the front and back for diff driving)-->
 
   <xacro:include filename="$(find m2020_urdf_models)/urdf/gazebo/m2020.gazebo.component_macros.xacro"/>
+
+  <xacro:property name="M_PI" value="3.14159"/>
 
   <xacro:property name="arm_joint_vel" value="0.2" /> <!-- original value: 1.79769e+308 -->
   <xacro:property name="head_joint_vel" value="1.0" /> <!-- original value: 1.79769e+308 -->
@@ -55,6 +58,13 @@
   <xacro:property name="head_friction" value="10.0"/>   
   <xacro:property name="head_effort" value="100.0" />
 
+  <xacro:property name="wheel_mass" value="10.0" />
+  <xacro:property name="wheel_effort" value="1000.0" />
+  <xacro:property name="wheel_velocity" value="20.0" />
+
+  <xacro:property name="wheel_radius" value="0.255" />
+  <xacro:property name="wheel_width" value="0.331" />
+  
 
 	<link name="base_footprint"/>
 
@@ -95,7 +105,7 @@
 	</link>
 	<link name="Body_Differential">
 		<inertial>
-			<origin xyz="0.142 0 0" rpy="0 -0 0"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
 			<mass value="${default_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
@@ -114,7 +124,7 @@
 	</link>
 	<link name="Body_RockerLeft">
 		<inertial>
-			<origin xyz="-0.214 0.79959 -0.2405" rpy="0 -0 0"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
 			<mass value="${default_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
@@ -133,7 +143,7 @@
 	</link>
 	<link name="Body_BogieLeft">
 		<inertial>
-			<origin xyz="0.54 0.91959 -0.4705" rpy="0 -0 0"/>
+			<origin xyz="0.0 0 0" rpy="0 -0 0"/>
 			<mass value="${default_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
@@ -152,7 +162,7 @@
 	</link>
 	<link name="Body_SteerLeftRear">
 		<inertial>
-			<origin xyz="1.165 1.0625 -0.8705" rpy="0 -0 0"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
 			<mass value="${default_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
@@ -171,8 +181,8 @@
 	</link>
 	<link name="Body_WheelLeftRear">
 		<inertial>
-			<origin xyz="1.165 1.0625 -0.8705" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${wheel_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
 		<visual name="VisGeom_Wheel_LeftRear">
@@ -182,16 +192,20 @@
 			</geometry>
 		</visual>
 		<collision name="ColGeom_Wheel_LeftRear">
-			<origin xyz="1.165 1.0625 -0.8705" rpy="0 -0 0"/>
+          <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+          <geometry>
+            <cylinder radius="${wheel_radius-0.0001}" length="${wheel_width}"/>
+          </geometry>		
+			<!--<origin xyz="1.165 1.0625 -0.8705" rpy="0 -0 0"/>
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_LeftRear.dae" scale="1 1 1"/>
-			</geometry>
+			</geometry>-->
 		</collision>		
 	</link>
 	<link name="Body_WheelLeftMiddle">
 		<inertial>
-			<origin xyz="0.09002 1.1845 -0.8705" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${wheel_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
 		<visual name="VisGeom_Wheel_LeftMiddle">
@@ -201,10 +215,14 @@
 			</geometry>
 		</visual>
 		<collision name="ColGeom_Wheel_LeftMiddle">
-			<origin xyz="0.09002 1.1845 -0.8705" rpy="0 -0 0"/>
+          <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+          <geometry>
+            <cylinder radius="${wheel_radius-0.0001}" length="${wheel_width}"/>
+          </geometry>	
+			<!--<origin xyz="0.09002 1.1845 -0.8705" rpy="0 -0 0"/>
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_LeftMiddle.dae" scale="1 1 1"/>
-			</geometry>
+			</geometry>-->
 		</collision>		
 	</link>
 	<link name="Body_SteerLeftFront">
@@ -228,8 +246,8 @@
 	</link>
 	<link name="Body_WheelLeftFront">
 		<inertial>
-			<origin xyz="-1.095 1.0625 -0.8705" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${wheel_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
 		<visual name="VisGeom_Wheel_LeftFront">
@@ -239,10 +257,14 @@
 			</geometry>
 		</visual>
 		<collision name="ColGeom_Wheel_LeftFront">
-			<origin xyz="-1.095 1.0625 -0.8705" rpy="0 -0 0"/>
+          <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+          <geometry>
+            <cylinder radius="${wheel_radius-0.0001}" length="${wheel_width}"/>
+          </geometry>			
+			<!--<origin xyz="-1.095 1.0625 -0.8705" rpy="0 -0 0"/>
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_LeftFront.dae" scale="1 1 1"/>
-			</geometry>
+			</geometry>-->
 		</collision>		
 	</link>
 	<link name="Body_RockerRight">
@@ -305,8 +327,8 @@
 	</link>
 	<link name="Body_WheelRightRear">
 		<inertial>
-			<origin xyz="1.165 -1.0625 -0.8705" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${wheel_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
 		<visual name="VisGeom_Wheel_RightRear">
@@ -316,16 +338,20 @@
 			</geometry>
 		</visual>
 		<collision name="ColGeom_Wheel_RightRear">
-			<origin xyz="1.165 -1.0625 -0.8705" rpy="0 -0 0"/>
+          <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+          <geometry>
+            <cylinder radius="${wheel_radius-0.0001}" length="${wheel_width}"/>
+          </geometry>			
+			<!--<origin xyz="1.165 -1.0625 -0.8705" rpy="0 -0 0"/>
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_RightRear.dae" scale="1 1 1"/>
-			</geometry>
+			</geometry>-->
 		</collision>		
 	</link>
 	<link name="Body_WheelRightMiddle">
 		<inertial>
-			<origin xyz="0.09002 -1.1845 -0.8705" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${wheel_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
 		<visual name="VisGeom_Wheel_RightMiddle">
@@ -335,10 +361,14 @@
 			</geometry>
 		</visual>
 		<collision name="ColGeom_Wheel_RightMiddle">
-			<origin xyz="0.09002 -1.1845 -0.8705" rpy="0 -0 0"/>
+          <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+          <geometry>
+            <cylinder radius="${wheel_radius-0.0001}" length="${wheel_width}"/>
+          </geometry>			
+		  <!--<origin xyz="0.09002 -1.1845 -0.8705" rpy="0 -0 0"/>
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_RightMiddle.dae" scale="1 1 1"/>
-			</geometry>
+			</geometry>-->
 		</collision>		
 	</link>
 	<link name="Body_SteerRightFront">
@@ -362,8 +392,8 @@
 	</link>
 	<link name="Body_WheelRightFront">
 		<inertial>
-			<origin xyz="-1.095 -1.0625 -0.8705" rpy="0 -0 0"/>
-			<mass value="${default_mass}"/>
+			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<mass value="${wheel_mass}"/>
 			<inertia ixx="${default_ixx}" ixy="0" ixz="0" iyy="${default_iyy}" iyz="0" izz="${default_izz}"/>
 		</inertial>
 		<visual name="VisGeom_Wheel_RightFront">
@@ -373,10 +403,14 @@
 			</geometry>
 		</visual>
 		<collision name="ColGeom_Wheel_RightFront">
-			<origin xyz="-1.095 -1.0625 -0.8705" rpy="0 -0 0"/>
+          <origin xyz="0 0 0" rpy="${M_PI/2} 0 0" />
+          <geometry>
+            <cylinder radius="${wheel_radius-0.0001}" length="${wheel_width}"/>
+          </geometry>			
+			<!--<origin xyz="-1.095 -1.0625 -0.8705" rpy="0 -0 0"/>
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Wheel_RightFront.dae" scale="1 1 1"/>
-			</geometry>
+			</geometry>-->
 		</collision>		
 	</link>
 	<link name="Body_RSM_AZ">
@@ -819,19 +853,21 @@
 		<axis xyz="0 0 1"/>
 		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="LR_DRIVE" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="LR_DRIVE" type="continuous"> <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="0 0 0" rpy="0 -0 0"/>
 		<parent link="Body_SteerLeftRear"/>
 		<child link="Body_WheelLeftRear"/>
 		<axis xyz="0 -1 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit effort="${wheel_effort}" velocity="${wheel_velocity}"/>
+		<dynamics damping="0.0" friction="0.0" />
 	</joint>
-	<joint name="LM_DRIVE" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="LM_DRIVE" type="continuous"> <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="0.44998 -0.26491 0.4" rpy="0 -0 0"/>
 		<parent link="Body_BogieLeft"/>
 		<child link="Body_WheelLeftMiddle"/>
 		<axis xyz="0 -1 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit effort="${wheel_effort}" velocity="${wheel_velocity}"/>
+		<dynamics damping="0.0" friction="0.0" />
 	</joint>
 	<joint name="LF_STEER" type="fixed"> <!-- TRACLabs Gazebo test hack -->
 		<origin xyz="0.881 -0.26291 0.63" rpy="0 -0 0"/>
@@ -840,12 +876,13 @@
 		<axis xyz="0 0 1"/>
 		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="LF_DRIVE" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="LF_DRIVE" type="continuous"> <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="0 0 0" rpy="0 -0 0"/>
 		<parent link="Body_SteerLeftFront"/>
 		<child link="Body_WheelLeftFront"/>
 		<axis xyz="0 -1 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit effort="${wheel_effort}" velocity="${wheel_velocity}"/>
+		<dynamics damping="0.0" friction="0.0" />
 	</joint>
 	<joint name="RIGHT_DIFFERENTIAL" type="fixed"> <!-- TRACLabs Gazebo test hack -->
 		<origin xyz="0.30402 0.79959 -0.89288" rpy="0 -0 0"/>
@@ -861,26 +898,28 @@
 		<axis xyz="0 1 0"/>
 		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="RR_STEER" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="RR_STEER" type="fixed"> <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="-0.625 0.14291 0.4" rpy="0 -0 0"/>
 		<parent link="Body_BogieRight"/>
 		<child link="Body_SteerRightRear"/>
 		<axis xyz="0 0 1"/>
 		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="RR_DRIVE" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="RR_DRIVE" type="continuous">  <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="0 0 0" rpy="0 -0 0"/>
 		<parent link="Body_SteerRightRear"/>
 		<child link="Body_WheelRightRear"/>
 		<axis xyz="0 -1 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit effort="${wheel_effort}" velocity="${wheel_velocity}"/>
+		<dynamics damping="0.0" friction="0.0" />
 	</joint>
-	<joint name="RM_DRIVE" type="fixed"> <!-- TRACLabs Gazebo test hack -->
+	<joint name="RM_DRIVE" type="continuous"> <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="0.44998 0.26491 0.4" rpy="0 -0 0"/>
 		<parent link="Body_BogieRight"/>
 		<child link="Body_WheelRightMiddle"/>
 		<axis xyz="0 -1 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit effort="${wheel_effort}" velocity="${wheel_velocity}"/>
+		<dynamics damping="0.0" friction="0.0" />
 	</joint>
 	<joint name="RF_STEER" type="fixed"> <!-- TRACLabs Gazebo test hack -->
 		<origin xyz="0.881 0.26291 0.63" rpy="0 -0 0"/>
@@ -889,12 +928,13 @@
 		<axis xyz="0 0 1"/>
 		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="RF_DRIVE" type="fixed"> <!-- revolute TRACLabs Gazebo test hack -->
+	<joint name="RF_DRIVE" type="continuous">  <!-- revolute TRACLabs Gazebo test hack -->
 		<origin xyz="0 0 0" rpy="0 -0 0"/>
 		<parent link="Body_SteerRightFront"/>
 		<child link="Body_WheelRightFront"/>
 		<axis xyz="0 -1 0"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit effort="${wheel_effort}" velocity="${wheel_velocity}"/>
+		<dynamics damping="0.0" friction="0.0" />
 	</joint>
 	<joint name="RSM_AZ_ENC" type="revolute">
 		<origin xyz="0.804037 0.559028 -1.91927" rpy="0 -0 3.12414"/>

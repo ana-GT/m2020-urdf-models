@@ -3,9 +3,91 @@
 <robot name="perseverance" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <xacro:property name="robot_name" value="perseverance" />
-  
+  <xacro:property name="mu1" value="100.0"/>
+  <xacro:property name="mu2" value="100.0"/>
+
   <xacro:include filename="$(find m2020_urdf_models)/urdf/m2020.traclabs.urdf.xacro" />
   <xacro:include filename="$(find m2020_urdf_models)/urdf/gazebo/m2020.gazebo.components.xacro" />
   <xacro:include filename="$(find m2020_urdf_models)/urdf/gazebo/m2020.gazebo.controllers.xacro" />
+
+  <!-- Parameters wheels -->
+  <gazebo reference="LF_DRIVE">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="LM_DRIVE">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="LR_DRIVE">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="RF_DRIVE">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="RM_DRIVE">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+  <gazebo reference="RR_DRIVE">
+    <implicitSpringDamper>1</implicitSpringDamper>
+  </gazebo>
+
+  <gazebo reference="Body_WheelLeftFront">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>${mu1}</mu1>
+    <mu2>${mu2}</mu2>
+    <!-- <fdir1>1 0 0</fdir1 -->
+    <maxVel>1.0</maxVel>
+    <minDepth>0.01</minDepth>
+  </gazebo>
+
+  <gazebo reference="Body_WheelLeftRear">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>${mu1}</mu1>
+    <mu2>${mu2}</mu2>
+    <!-- <fdir1>1 0 0</fdir1 -->
+    <maxVel>1.0</maxVel>
+    <minDepth>0.01</minDepth>
+  </gazebo>
+
+  <gazebo reference="Body_WheelLeftMiddle">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>${mu1}</mu1>
+    <mu2>${mu2}</mu2>
+    <!-- <fdir1>1 0 0</fdir1 -->
+    <maxVel>1.0</maxVel>
+    <minDepth>0.01</minDepth>
+  </gazebo>
+
+  <gazebo reference="Body_WheelRightFront">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>${mu1}</mu1>
+    <mu2>${mu2}</mu2>
+    <!-- <fdir1>1 0 0</fdir1 -->
+    <maxVel>1.0</maxVel>
+    <minDepth>0.01</minDepth>
+  </gazebo>
+
+  <gazebo reference="Body_WheelRightRear">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>${mu1}</mu1>
+    <mu2>${mu2}</mu2>
+    <!-- <fdir1>1 0 0</fdir1 -->
+    <maxVel>1.0</maxVel>
+    <minDepth>0.01</minDepth>
+  </gazebo>
+
+  <gazebo reference="Body_WheelRightMiddle">
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <mu1>${mu1}</mu1>
+    <mu2>${mu2}</mu2>
+    <!-- <fdir1>1 0 0</fdir1 -->
+    <maxVel>1.0</maxVel>
+    <minDepth>0.01</minDepth>
+  </gazebo>
 
 </robot>

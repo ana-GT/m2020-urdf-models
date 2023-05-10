@@ -8,8 +8,7 @@
   <xacro:include filename="$(find m2020_urdf_models)/urdf/gazebo/kinect.urdf.xacro"/>
 
   <!-- build components -->
-  <!--<xacro:m2020_base robot_name="${robot_name}" />-->
-
+  <xacro:m2020_base prefix="" />
   <xacro:m2020_arm prefix=""/>
   <xacro:m2020_head prefix=""/>
 

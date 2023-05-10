@@ -47,18 +47,6 @@
        <motorTorqueConstant>${tc}</motorTorqueConstant>
      </transmission>
 
-<!--      <transmission name="${prefix}_${joint_name}_trans">
-       <type>transmission_interface/SimpleTransmission</type>
-       <joint name="${prefix}_${joint_name}_joint">
-         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-       </joint>
-       <actuator name="${prefix}_${joint_name}_motor">
-         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-         <mechanicalReduction>${reduction}</mechanicalReduction>
-       </actuator>
-       <motorTorqueConstant>${tc}</motorTorqueConstant>
-     </transmission>
-    --> 
   </xacro:macro>
 
   <xacro:macro name="gazebo_dif_drive_trans" params="prefix joint_name reduction tc">
@@ -75,21 +63,26 @@
      </transmission>
   </xacro:macro>
 
-  <!-- tracbot base xacro -->
-  <!--<xacro:macro name="tracbot_base" params="robot_name side">
-    
-    <xacro:gazebo_dif_drive_trans prefix="${side}" joint_name="wheel" reduction="1" tc="1"/>
+  <!-- m2020 base xacro -->
+  <xacro:macro name="m2020_base" params="prefix static:=false gravity_off:=true">
 
-    <xacro:gazebo_simple_trans prefix="front_${side}" joint_name="caster_bracket" reduction="1" tc="1"/>
-    <xacro:gazebo_simple_trans prefix="front_${side}" joint_name="caster_wheel" reduction="1" tc="1"/>
-  
+    <xacro:gazebo_dif_drive_trans prefix="${prefix}" joint_name="LF_DRIVE" reduction="1" tc="1"/>
+    <xacro:gazebo_dif_drive_trans prefix="${prefix}" joint_name="LR_DRIVE" reduction="1" tc="1"/>
+    <xacro:gazebo_dif_drive_trans prefix="${prefix}" joint_name="LM_DRIVE" reduction="1" tc="1"/>
+
+
+    <xacro:gazebo_dif_drive_trans prefix="${prefix}" joint_name="RF_DRIVE" reduction="1" tc="1"/>
+    <xacro:gazebo_dif_drive_trans prefix="${prefix}" joint_name="RR_DRIVE" reduction="1" tc="1"/>
+    <xacro:gazebo_dif_drive_trans prefix="${prefix}" joint_name="RM_DRIVE" reduction="1" tc="1"/>
+
+<!--    
     <xacro:gazebo_simple_trans prefix="back_${side}" joint_name="caster_bracket" reduction="1" tc="1"/>        
     <xacro:gazebo_simple_trans prefix="back_${side}" joint_name="caster_wheel" reduction="1" tc="1"/>
-  
-  </xacro:macro>-->
+  -->
+  </xacro:macro>
 
 
-  <!-- tracbot arm xacro -->
+  <!-- m2020 arm xacro -->
   <xacro:macro name="m2020_arm" params="prefix static:=false gravity_off:=true">
 
     <xacro:gazebo_link prefix="${prefix}" link_name="Body_RA_Link2" collide="true" static="${static}" gravity_off="${gravity_off}"/>

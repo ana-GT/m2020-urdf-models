@@ -4,15 +4,15 @@ joint_state_controller:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 
-#mobile_base_controller:
-#  type: "diff_drive_controller/DiffDriveController"
-#  left_wheel: 'left_wheel_joint'
-#  right_wheel: 'right_wheel_joint'
-#  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
-#  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
-#  base_frame_id: base_footprint 
-#  cmd_vel_timeout: 0.25
-#  enable_odom_tf: false # set to false if perfect odometry is ever enabled. True publishes the tf
+mobile_base_controller:
+  type: "diff_drive_controller/DiffDriveController"
+  left_wheel: ['LF_DRIVE', 'LR_DRIVE', 'LM_DRIVE']
+  right_wheel: ['RF_DRIVE', 'RR_DRIVE', 'RM_DRIVE']
+  pose_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+  twist_covariance_diagonal: [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 1000.0]
+  base_frame_id: base_footprint 
+  cmd_vel_timeout: 0.25
+  enable_odom_tf: false # set to false if perfect odometry is ever enabled. True publishes the tf
 
 arm_controller:
   type: "effort_controllers/JointTrajectoryController"
