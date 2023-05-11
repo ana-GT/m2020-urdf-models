@@ -9,16 +9,27 @@
   <arg name="x" default="0"/>
   <arg name="y" default="0"/>
   <arg name="z" default="2.0"/>    
-  <arg name="roll" default="3.1416"/>
+  <arg name="roll" default="0.0"/>
   <arg name="pitch" default="0.0"/>
   <arg name="yaw" default="0"/>
 
   <arg name="nav_default_planner" default="craftsman_navigation_tools::Baseline3DNavigationPlanner"/>
-  <arg name="nav_default_executor" default="craftsman_navigation_tools::Baseline3DNavigationExecutor"/>
+  <!-- <arg name="nav_default_executor" default="craftsman_navigation_tools::Baseline3DNavigationExecutor"/> -->
+  <arg name="nav_default_executor" default="craftsman_navigation_tools::Path3DPIDNavigationExecutor"/>
 
   <!-- Time -->
   <param name="use_sim_time" value="true" unless="$(arg sim)"/>
   <param name="use_sim_time" value="false" if="$(arg sim)"/>
+
+  <rosparam param="kp_x">0.05</rosparam>
+  <rosparam param="kp_y">0.05</rosparam>
+  <rosparam param="kp_z">0.05</rosparam>
+  <rosparam param="kp_roll">0.1</rosparam>
+  <rosparam param="kp_pitch">0.1</rosparam>
+  <rosparam param="kp_yaw">0.1</rosparam>
+  <rosparam param="lookahead">10</rosparam>
+
+  <!-- <param name="kp_trans" value="0.1"/> -->
 
   <include file="$(find m2020_urdf_models)/launch/ingenuity/ingenuity_config.launch">
     <arg name="sim" value="$(arg sim)"/>
@@ -59,6 +70,7 @@
     <arg name="z" value="$(arg z)"/>    
     <arg name="roll" value="$(arg roll)"/>    
     <arg name="yaw" value="$(arg yaw)"/>
+    <arg name="pitch" value="$(arg pitch)"/>
     
   </include>
 

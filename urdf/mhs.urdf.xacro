@@ -8,7 +8,7 @@
 
 	<link name="root">
 		<inertial>
-			<origin xyz="0 0 0" rpy="0 -0 0"/>
+			<origin xyz="0 0 0" rpy="0 0 0"/>
 			<mass value="0"/>
 			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
 		</inertial>
@@ -158,7 +158,7 @@
 	</link>
 	<link name="Frame_MHS_NAVCAM"></link>
 	<joint name="MHS_MainBody_v16" type="fixed">
-		<origin xyz="0 0 0" rpy="0 -0 0"/>
+		<origin xyz="0 0 0" rpy="3.14 0 0"/>
 		<parent link="root"/>
 		<child link="Body_MHS_MainBody_v16"/>
 	</joint>
