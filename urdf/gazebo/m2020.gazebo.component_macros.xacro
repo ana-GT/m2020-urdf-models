@@ -75,6 +75,7 @@
     <xacro:gazebo_dif_drive_trans prefix="${prefix}" joint_name="RR_DRIVE" reduction="1" tc="1"/>
     <xacro:gazebo_dif_drive_trans prefix="${prefix}" joint_name="RM_DRIVE" reduction="1" tc="1"/>
 
+    <xacro:gazebo_link prefix="${prefix}" link_name="Body_Chassis" collide="true" static="${static}" gravity_off="${gravity_off}"/>
 <!--    
     <xacro:gazebo_simple_trans prefix="back_${side}" joint_name="caster_bracket" reduction="1" tc="1"/>        
     <xacro:gazebo_simple_trans prefix="back_${side}" joint_name="caster_wheel" reduction="1" tc="1"/>

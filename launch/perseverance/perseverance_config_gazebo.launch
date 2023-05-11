@@ -10,7 +10,7 @@
   <arg name="yaw"     default="0"/>  
   <arg name="paused" default="true"/>
   <arg name="gzserver" default="true"/>
-  <arg name="world"    default="$(find m2020_urdf_models)/worlds/simple_asphalt.world"/>
+  <arg name="world"    default="$(find m2020_urdf_models)/worlds/simple_asphalt.world"/> <!--  $(find tracbot_gazebo)/worlds/new_format_empty.world-->
 
   <arg name="initial_joint_positions"
       default="-J JOINT1_ENC 0.096
