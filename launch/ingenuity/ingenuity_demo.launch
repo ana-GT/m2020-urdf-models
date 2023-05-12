@@ -14,7 +14,6 @@
   <arg name="yaw" default="0"/>
 
   <arg name="nav_default_planner" default="craftsman_navigation_tools::Baseline3DNavigationPlanner"/>
-  <!-- <arg name="nav_default_executor" default="craftsman_navigation_tools::Baseline3DNavigationExecutor"/> -->
   <arg name="nav_default_executor" default="craftsman_navigation_tools::Path3DPIDNavigationExecutor"/>
 
   <!-- Time -->

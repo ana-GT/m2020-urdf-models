@@ -48,7 +48,7 @@
           <param name="robot_name" value="$(arg robot_name)"/>
           <param name="planner_plugin" value="$(arg planner_plugin)"/>
           <param name="execution_plugin" value="basic_executors::BasicRosControlExecutor"/>
-          <rosparam file="$(find craftsman_robots)/config/perseverance/perseverance_controllers.yaml" ns="param/controller_list"/>
+          <rosparam file="$(find m2020_urdf_models)/config/perseverance/perseverance_controllers.yaml" ns="param/controller_list"/>
           <param name="param/execution_speed_scalar" value="0.5"/>
           <remap from="joint_states" to="joint_states"/>
           <param name="use_namespace" value="$(arg use_namespace)"/>
@@ -72,25 +72,24 @@
         <param name="robot_name" value="$(arg robot_name)"/>
         <param name="planner_plugin" value="$(arg planner_plugin)"/>      
         <param name="execution_plugin" value="basic_executors::JointStateExecutor"/>
-        <!-- basic_executors::IndustrialRobotClientExecutor -->
         <param name="param/execution_speed_scalar" value="0.25"/>
         <param name="publish_collision_object" value="true"/>
         <remap from="joint_states" to="joint_states"/>
         <param name="use_namespace" value="$(arg use_namespace)"/>
       </node>
     </group>
-    <!--<group unless="$(arg sim)">
+    <group unless="$(arg sim)">
       <node name="planner_node" pkg="planner_interface" type="planner_node" output="screen">
         <param name="limits_param" value="/joint_limits"/>
         <param name="loop_rate" value="$(arg loop_rate)"/>
         <param name="robot_name" value="$(arg robot_name)"/>
         <param name="planner_plugin" value="$(arg planner_plugin)"/>
         <param name="execution_plugin" value="basic_executors::BasicRosControlExecutor"/>
-        <rosparam file="$(find craftsman_robots)/config/fetch/fetch_controllers.yaml" ns="param/controller_list"/>
+        <rosparam file="$(find m2020_urdf_models)/config/perseverance/perseverance_controllers.yaml" ns="param/controller_list"/>
         <param name="param/execution_speed_scalar" value="0.5"/>
-        <remap from="joint_states" to="merged_joint_states"/>
+        <remap from="joint_states" to="joint_states"/>
         <param name="use_namespace" value="$(arg use_namespace)"/>
       </node>
-    </group>-->
+    </group>
   </group> <!-- unless=use_namespace -->
 </launch>
