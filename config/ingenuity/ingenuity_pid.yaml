@@ -1,0 +1,36 @@
+pid:
+  kp:
+    x: 0.1
+    y: 0.1
+    z: 0.1
+    roll: 0.15
+    pitch: 0.15
+    yaw: 0.15
+  kd:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  ki:
+    x: 0.002
+    y: 0.002
+    z: 0.002
+    roll: 0.001
+    pitch: 0.001
+    yaw: 0.001
+  i_clamp:
+    x: 0.1
+    y: 0.1
+    z: 0.1
+    roll: 0.1
+    pitch: 0.1
+    yaw: 0.1
+  lookahead: 5
+  time_to_wait: 100
+  correction_threshold: 0.25
+  pos_err_thresh: 0.23
+  pos_err_thresh: 0.05
+  path_debug: False
+  

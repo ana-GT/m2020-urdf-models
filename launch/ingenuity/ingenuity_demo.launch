@@ -16,19 +16,12 @@
   <arg name="nav_default_planner" default="craftsman_navigation_tools::Baseline3DNavigationPlanner"/>
   <arg name="nav_default_executor" default="craftsman_navigation_tools::Path3DPIDNavigationExecutor"/>
 
+  <rosparam file="$(find m2020_urdf_models)/config/ingenuity/ingenuity_pid.yaml"/>
+
   <!-- Time -->
   <param name="use_sim_time" value="true" unless="$(arg sim)"/>
   <param name="use_sim_time" value="false" if="$(arg sim)"/>
 
-  <rosparam param="kp_x">0.05</rosparam>
-  <rosparam param="kp_y">0.05</rosparam>
-  <rosparam param="kp_z">0.05</rosparam>
-  <rosparam param="kp_roll">0.1</rosparam>
-  <rosparam param="kp_pitch">0.1</rosparam>
-  <rosparam param="kp_yaw">0.1</rosparam>
-  <rosparam param="lookahead">10</rosparam>
-
-  <!-- <param name="kp_trans" value="0.1"/> -->
 
   <include file="$(find m2020_urdf_models)/launch/ingenuity/ingenuity_config.launch">
     <arg name="sim" value="$(arg sim)"/>
@@ -63,7 +56,7 @@
 
     <arg name="nav_path_step" value="0.015"/>
     <arg name="nav_file_path" value="$(find m2020_urdf_models)/config/ingenuity/ingenuity_navigation.yaml"/>
-    
+
     <arg name="x" value="$(arg x)"/>
     <arg name="y" value="$(arg y)"/>
     <arg name="z" value="$(arg z)"/>    
