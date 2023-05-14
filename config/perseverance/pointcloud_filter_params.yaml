@@ -1,0 +1,28 @@
+cloud_filter_chain:
+  # Only containment filtering
+  - name: robot_body_filter_containment
+    type: robot_body_filter/RobotBodyFilterPointCloud2
+    params:
+      debug/pcl/clip: false
+      debug/pcl/inside: false
+      debug/pcl/shadow: false
+      sensor/min_distance: 0.05
+      sensor/max_distance: 10
+      # For more information of how to choose the fixed frame and configure point_by_point, see the discussion at https://github.com/peci1/robot_body_filter/pull/18#discussion_r780655811
+      sensor/point_by_point: false
+      frames/fixed: world
+      frames/sensor: kinect_optical_frame
+      frames/filtering: kinect_optical_frame
+      frames/output: kinect_optical_frame
+      body_model/inflation/scale: 1.0
+      body_model/inflation/padding: 0.03
+      body_model/robot_description_param: robot_description
+      filter/do_clipping: true
+      filter/do_contains_test: true
+      filter/do_shadow_test: false
+      only_links:
+        - Body_RA_Link2
+        - Body_RA_Link3
+        - Body_RA_Link4
+        - Body_RA_Link5
+        - Body_Turret
