@@ -26,3 +26,4 @@ cloud_filter_chain:
         - Body_RA_Link4
         - Body_RA_Link5
         - Body_Turret
+#        - Body_Chassis

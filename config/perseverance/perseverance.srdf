@@ -19,6 +19,12 @@
         <joint name="RSM_EL_ENC" value="1.5708" />
     </group_state>
 
+    <group_state name="head_down" group="head">
+        <joint name="RSM_AZ_ENC" value="3.1416"/>
+        <joint name="RSM_EL_ENC" value="1.0" />
+    </group_state>
+
+
     <group_state name="head_left" group="head">
         <joint name="RSM_AZ_ENC" value="1.5708"/>
         <joint name="RSM_EL_ENC" value="1.5709" />
