@@ -2,20 +2,24 @@
 <launch>
   <arg name="sim" default="true"/>
   <arg name="rviz" default="true"/>
-  <arg name="robot_name" default="perseverance"/>
+  <arg name="robot_name" default="perseverance_1"/>
   <arg name="joint_control" default="false"/>
   <arg name="use_namespace" default="false"/>
   <arg name="x" default="0"/>
   <arg name="y" default="0"/>
   <arg name="z" default="0.10"/>    
   <arg name="yaw" default="0"/>
-
+  <arg name="gzserver" default="true"/>
+  <arg name="octomap" default="false"/>
+  
   <arg name="nav_default_planner" default="craftsman_navigation_tools::PlanarNavigationPlanner"/>
   <arg name="nav_default_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
 
   <!-- Time -->
   <param name="use_sim_time" value="true" unless="$(arg sim)"/>
   <param name="use_sim_time" value="false" if="$(arg sim)"/>
+
+  <param name="show_namespace" value="true"/>
 
   <!-- Configuration -->
   <include file="$(find m2020_urdf_models)/launch/perseverance/perseverance_config.launch" if="$(arg sim)">
@@ -29,7 +33,10 @@
     <arg name="use_namespace" value="$(arg use_namespace)"/>
     <arg name="x" value="$(arg x)"/>
     <arg name="y" value="$(arg y)"/>
-    <arg name="z" value="$(arg z)"/>        
+    <arg name="z" value="$(arg z)"/>     
+    <arg name="gzserver" value="$(arg gzserver)"/>  
+    <arg name="rviz" value="false"/> 
+    <arg name="octomap" value="$(arg octomap)"/>
   </include>
 
 
@@ -65,9 +72,10 @@
     <arg name="yaw" value="$(arg yaw)"/>
     
   </include>
-
-  <group unless="$(arg use_namespace)">
-    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance.rviz" respawn="false" output="screen" if="$(arg rviz)"/>
-  </group>
+  
+  <group if="$(arg rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance.rviz" respawn="false" output="screen" unless="$(arg use_namespace)"/> 
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance_ns.rviz" respawn="false" output="screen" if="$(arg use_namespace)"/>     
+  </group> 
 
 </launch>

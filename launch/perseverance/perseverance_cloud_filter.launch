@@ -1,26 +1,56 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="sim"        default="true"/>
-  <arg name="rviz"       default="true"/>
+
   <arg name="robot_name" default="perseverance"/>
-  <arg name="in_topic"   default="/kinect/depth/points"/>
+  <arg name="use_namespace" default="false"/>
+
+  <!-- Name without namespace -->
+  <arg name="in_topic"   default="kinect/depth/points"/>
   <arg name="out_topic"  default="filtered_points"/>
+  
   <arg name="resolution" default="0.02"/>    
   <arg name="octomap"    default="true"/>
+  <arg name="reference_frame" default="world"/>
+  
+  <arg name="filter_ground" default="true"/>
+  <arg name="filter_ground_height" default="0.05"/>
+  
 
-  <node name="laser_filter" pkg="sensor_filters" type="pointcloud2_filter_chain" output="screen">
-    <rosparam command="load" file="$(find m2020_urdf_models)/config/perseverance/pointcloud_filter_params.yaml" />
-    <remap from="~input" to="$(arg in_topic)" />
-    <remap from="~output" to="$(arg out_topic)" />
-  </node>
+  <group if="$(arg use_namespace)" ns="$(arg robot_name)">
 
+   <node name="laser_filter" pkg="sensor_filters" type="pointcloud2_filter_chain" output="screen">
+     <rosparam command="load" file="$(find m2020_urdf_models)/config/perseverance/pointcloud_filter_ns_params.yaml" subst_value="true" />
+     <remap from="~input" to="/$(arg robot_name)/$(arg in_topic)" />
+     <remap from="~output" to="/$(arg robot_name)/$(arg out_topic)" />
+   </node>
 
     <!-- octomap server --> 
-    <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" args="cloud_in:=$(arg out_topic) _resolution:=$(arg resolution)" if="$(arg octomap)">
-      <param name="frame_id" value="world"/>
-      <param name="base_frame_id" value="base_footprint"/>
-      <param name="filter_ground" value="true"/>
-      <param name="ground_filter/plane_distance" value="0.05"/>
+    <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" args="cloud_in:=/$(arg robot_name)/$(arg out_topic) _resolution:=$(arg resolution)">
+      <param name="frame_id" value="$(arg reference_frame)"/>
+      <param name="base_frame_id" value="$(arg robot_name)/base_footprint"/>
+      <param name="filter_ground" value="$(arg filter_ground)"/>
+      <param name="ground_filter/plane_distance" value="$(arg  filter_ground_height)"/>
     </node>
+    
+  </group>
+
+  <group unless="$(arg use_namespace)" >
+
+   <node name="laser_filter" pkg="sensor_filters" type="pointcloud2_filter_chain" output="screen">
+     <rosparam command="load" file="$(find m2020_urdf_models)/config/perseverance/pointcloud_filter_params.yaml" />
+     <remap from="~input" to="/$(arg in_topic)" />
+     <remap from="~output" to="/$(arg out_topic)" />
+   </node>
+
+    <!-- octomap server --> 
+    <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" args="cloud_in:=/$(arg out_topic) _resolution:=$(arg resolution)">
+      <param name="frame_id" value="$(arg reference_frame)"/>
+      <param name="base_frame_id" value="base_footprint"/>
+      <param name="filter_ground" value="$(arg filter_ground)"/>
+      <param name="ground_filter/plane_distance" value="$(arg  filter_ground_height)"/>
+    </node>
+    
+  </group>
+
 
 </launch>

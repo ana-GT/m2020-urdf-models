@@ -11,6 +11,7 @@
   <arg name="paused" default="true"/>
   <arg name="gzserver" default="true"/>
   <arg name="world"    default="$(find m2020_urdf_models)/worlds/simple_asphalt.world"/> <!--  $(find tracbot_gazebo)/worlds/new_format_empty.world-->
+  <arg name="octomap" default="false"/>
 
   <arg name="initial_joint_positions"
       default="-J JOINT1_ENC 0.096
@@ -25,6 +26,12 @@
     <arg name="world_name" value="$(arg world)"/>
     <arg name="paused" value="$(arg paused)"/>
   </include>
+
+  <!-- octomap server -->
+  <include file="$(find m2020_urdf_models)/launch/perseverance/perseverance_cloud_filter.launch" if="$(arg octomap)">
+    <arg name="use_namespace" value="$(arg use_namespace)"/>
+    <arg name="robot_name" value="$(arg robot_name)"/>    
+  </include> 
 
   <!-- *** No namespace *** -->  
   <group unless="$(arg use_namespace)">
@@ -56,23 +63,51 @@
       <param name="model_name" value="$(arg robot_name)"/>
     </node>                     
 
+    <!-- octomap server -->
+    <include file="$(find m2020_urdf_models)/launch/perseverance_perception.launch">
+      <arg name="ur_file" value="$(find plummrs_craftsman_support)/config/perseverance/ur_description.yaml"/>    
+    </include>
+
   </group>
 
   <!-- *** With namespace *** -->
   <group if="$(arg use_namespace)" ns="$(arg robot_name)">
 
-    <param name="robot_description" command="$(find xacro)/xacro '$(find m2020_urdf_models)/urdf/m2020.sim.urdf.xacro'"/>  
+    <param name="robot_description" command="$(find xacro)/xacro '$(find m2020_urdf_models)/urdf/m2020.sim.urdf.xacro' robot_namespace:='$(arg robot_name)' "/>  
     <param name="robot_description_semantic" textfile="$(find m2020_urdf_models)/config/perseverance/perseverance.srdf"/>
 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
       <param name="tf_prefix" value="$(arg robot_name)"/>
     </node>
-      
   
-  </group>
+    <node name="model_spawner"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-x $(arg x)
+                -y $(arg y)
+                -z $(arg z)
+                -Y $(arg yaw)
+                -param robot_description -urdf -model $(arg robot_name) $(arg initial_joint_positions)"/>
 
+    <rosparam file="$(find m2020_urdf_models)/config/perseverance/controllers/m2020_controllers.yaml" subst_value="true" />
+
+    <node pkg="controller_manager" type="spawner" name="controller_spawner" respawn="false" output="screen"
+          args="joint_state_controller arm_controller head_controller mobile_base_controller"/> 
+
+    <!-- Hack while driving is not set yet -->
+    <node name="model_states_converter" pkg="gazebo_utils" type="model_states_converter">
+      <param name="frequency" value="100.0" />
+      <param name="tf_odom_frame" value="world"/>
+      <param name="tf_base_frame" value="$(arg robot_name)/base_footprint"/>
+      <param name="model_name" value="$(arg robot_name)"/>
+    </node>                     
+  
+  </group> 
   
   <!-- Rviz -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance.rviz" respawn="false" output="screen" if="$(arg rviz)"/>  
+  <group if="$(arg rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance.rviz" respawn="false" output="screen" unless="$(arg use_namespace)"/> 
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find m2020_urdf_models)/rviz/perseverance_ns.rviz" respawn="false" output="screen" if="$(arg use_namespace)"/>     
+  </group> 
   
 </launch>
