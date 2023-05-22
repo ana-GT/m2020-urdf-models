@@ -8,7 +8,7 @@
   <arg name="use_namespace" default="false"/>
   <arg name="x" default="0"/>
   <arg name="y" default="0"/>
-  <arg name="z" default="2.0"/>    
+  <arg name="z" default="2.0"/>
   <arg name="roll" default="0.0"/>
   <arg name="pitch" default="0.0"/>
   <arg name="yaw" default="0"/>
