@@ -17,7 +17,7 @@ pid:
     yaw: 0.01
   lookahead: 100
   time_to_wait: 100
-  correction_threshold: 0.25
+  correction_threshold: 0.5
   pos_err_threshold: 0.3
   rot_err_threshold: 0.1
   path_debug: False
