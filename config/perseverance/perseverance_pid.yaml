@@ -18,6 +18,7 @@ pid:
   lookahead: 100
   time_to_wait: 100
   correction_threshold: 0.25
-  pos_err_thresh: 0.3
-  rot_err_thresh: 0.1
+  pos_err_threshold: 0.3
+  rot_err_threshold: 0.1
   path_debug: False
+  timeout_threshold: 5000
