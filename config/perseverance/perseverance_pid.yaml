@@ -1,0 +1,20 @@
+pid:
+  kp:
+    x: 1.0
+    y: 1.0
+    yaw: 1.5
+  kd:
+    x: 0.0
+    y: 0.0
+  ki:
+    x: 0.01
+    y: 0.05
+  i_clamp:
+    x: 0.1
+    y: 0.1
+  lookahead: 10
+  time_to_wait: 100
+  correction_threshold: 0.25
+  pos_err_thresh: 0.23
+  rot_err_thresh: 0.0872665
+  path_debug: False
