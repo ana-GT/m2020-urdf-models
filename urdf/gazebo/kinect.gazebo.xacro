@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   
-<xacro:macro name="kinect_gazebo" params="prefix"> 
+<xacro:macro name="kinect_gazebo" params="prefix:='' robot_namespace:='' ">
+ 
   <gazebo reference="${prefix}kinect_link">
         <sensor type="depth" name="kinect_sensor">
             <always_on>1</always_on>
@@ -25,7 +26,7 @@
                 <alwaysOn>true</alwaysOn>
                 <updateRate>0.0</updateRate>
                 <cameraName>kinect</cameraName>
-                <frameName>${prefix}kinect_optical_frame</frameName>
+                <frameName>${robot_namespace}/${prefix}kinect_optical_frame</frameName>
                 <imageTopicName>rgb/image_raw</imageTopicName>
                 <depthImageTopicName>depth/image_raw</depthImageTopicName>
                 <pointCloudTopicName>depth/points</pointCloudTopicName>

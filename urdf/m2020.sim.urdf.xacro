@@ -2,14 +2,19 @@
 
 <robot name="perseverance" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:property name="robot_name" value="perseverance" />
-  <xacro:property name="mu1" value="100"/>
-  <xacro:property name="mu2" value="100"/>
+  <xacro:arg name="robot_namespace" default="" />
+
+  <!--<xacro:property name="robot_name" value="perseverance" />-->
+  <xacro:property name="mu1" value="100.0"/>
+  <xacro:property name="mu2" value="100.0"/>
 
   <xacro:include filename="$(find m2020_urdf_models)/urdf/m2020.traclabs.urdf.xacro" />
   <xacro:include filename="$(find m2020_urdf_models)/urdf/gazebo/m2020.gazebo.components.xacro" />
   <xacro:include filename="$(find m2020_urdf_models)/urdf/gazebo/m2020.gazebo.controllers.xacro" />
 
+  <xacro:m2020_gazebo_components robot_namespace="$(arg robot_namespace)"/>
+  <xacro:m2020_gazebo_ros_control robot_namespace="$(arg robot_namespace)"/>
+  
   <!-- Parameters wheels -->
   <gazebo reference="LF_DRIVE">
     <implicitSpringDamper>1</implicitSpringDamper>

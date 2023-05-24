@@ -33,8 +33,9 @@
     <arg name="y" value="$(arg y_1)"/>
     <arg name="z" value="$(arg z_1)"/>
     <arg name="yaw" value="$(arg yaw_1)"/>    
-    <arg name="nav_default_planner" default="$(arg nav_default_planner)"/>
-    <arg name="nav_default_executor" default="$(arg nav_default_executor)"/>            
+    <arg name="nav_default_planner" value="$(arg nav_default_planner)"/>
+    <arg name="nav_default_executor" value="$(arg nav_default_executor)"/>    
+    <arg name="gzserver" value="true"/>        
   </include>
 
   <!-- Perseverance 2 -->
@@ -49,6 +50,7 @@
     <arg name="yaw" value="$(arg yaw_2)"/>            
     <arg name="nav_default_planner" default="$(arg nav_default_planner)"/>
     <arg name="nav_default_executor" default="$(arg nav_default_executor)"/>            
+    <arg name="gzserver" value="false"/>
   </include>
 
 

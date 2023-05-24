@@ -50,7 +50,7 @@
     </group_state>
 
     <group_state name="tucked" group="arm">
-        <joint name="JOINT1_ENC" value="-0.6"/>
+        <joint name="JOINT1_ENC" value="-0.75"/>
         <joint name="JOINT2_ENC" value="-1.44" />
         <joint name="JOINT3_ENC" value="2.52" />
         <joint name="JOINT4_ENC" value="0.0" />
