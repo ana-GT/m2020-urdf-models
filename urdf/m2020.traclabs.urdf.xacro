@@ -17,7 +17,7 @@
   <xacro:property name="stabilizer_default_vel" value="0.5"/> <!-- original value: 1.79769e+308 -->
   <xacro:property name="stabilizer_default_effort" value="50"/> <!-- original value: 1.79769e+308 -->
 
-  <xacro:property name="arm_default_damping" value="1.0"/>
+  <xacro:property name="arm_default_damping" value="250.0"/>
   <xacro:property name="arm_default_friction" value="10.0"/>   
   <xacro:property name="default_mass" value="3.0" />
   <xacro:property name="default_ixx" value="0.2" /> 

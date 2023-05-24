@@ -8,7 +8,7 @@
     </scene>
     <physics type="ode">
       <!-- update_rate="1000"-->
-      <gravity>0 0 -9.8</gravity>
+      <gravity>0 0 -3.71</gravity>
       <ode>
         <solver>
           <type>quick</type>

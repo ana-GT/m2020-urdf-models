@@ -63,11 +63,6 @@
       <param name="model_name" value="$(arg robot_name)"/>
     </node>                     
 
-    <!-- octomap server -->
-    <include file="$(find m2020_urdf_models)/launch/perseverance_perception.launch">
-      <arg name="ur_file" value="$(find plummrs_craftsman_support)/config/perseverance/ur_description.yaml"/>    
-    </include>
-
   </group>
 
   <!-- *** With namespace *** -->

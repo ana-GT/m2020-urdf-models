@@ -91,7 +91,7 @@
     </group_state>
 
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="end_tool_ee" parent_link="Body_RA_Link5" group="end_tool" parent_group="arm" />
+    <end_effector name="end_tool_ee" parent_link="Frame_DRILL" group="end_tool" parent_group="arm" />
 
 
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
