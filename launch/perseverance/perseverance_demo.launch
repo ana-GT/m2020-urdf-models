@@ -13,13 +13,7 @@
   <arg name="nav_default_planner" default="craftsman_navigation_tools::PlanarNavigationPlanner"/>
   <arg name="nav_default_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
 
-  <group if="$(arg sim)">
-    <rosparam file="$(find m2020_urdf_models)/config/perseverance/perseverance_rviz_pid.yaml"/>
-  </group>
-
-  <group unless="$(arg sim)">
-    <rosparam file="$(find m2020_urdf_models)/config/perseverance/perseverance_gazebo_pid.yaml"/>
-  </group>
+  <rosparam file="$(find m2020_urdf_models)/config/perseverance/perseverance_pid.yaml"/>
 
   <!-- Time -->
   <param name="use_sim_time" value="true" unless="$(arg sim)"/>
