@@ -5,6 +5,8 @@
       <SendStoredPose robot="perseverance_1" pose="head_down" group="head"/>
       <SendStoredPose robot="perseverance_1" pose="tucked" group="arm"/>
       <NavigateNode robot="perseverance_1" goal_frame="world" goal_xyz="2.0; 0.0; 0.0" goal_quat="0.0; 0.0; 0.0; 1.0"/>
+      <Wait msec="1000"/>
+      <RequestEmptyService robot="perseverance_1" service="octomap_server/reset"/>
     </Sequence>
 
   </BehaviorTree>
