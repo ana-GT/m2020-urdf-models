@@ -89,7 +89,7 @@
 		<visual name="VisGeom_Left_Bogie">
 			<origin xyz="0.54 0.91959 -0.4705" rpy="0 -0 0"/>
 			<geometry>
-				<!-- <mesh filename="package://m2020_urdf_models/rover/meshes/Left_Bogie.dae" scale="1 1 1"/> --> 
+				<!-- <mesh filename="package://m2020_urdf_models/rover/meshes/Left_Bogie.dae" scale="1 1 1"/> -->  
 				<mesh filename="package://m2020_urdf_models/rover/meshes/Left_Bogie_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</visual>
