@@ -27,9 +27,9 @@
 		</visual>
 		<collision name="ColGeom_MHS_MainBody_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<geometry>
-				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_MainBody_v16.dae" scale="1 1 1"/>
-			</geometry>
+      <geometry>
+        <box size="1.22 1.22 0.55" />
+      </geometry>
 		</collision>
 	</link>
 	<link name="Body_MHS_TopBlades_v16">
@@ -44,13 +44,6 @@
 				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_TopBlades_v16.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
-		<collision name="ColGeom_MHS_TopBlades_v16">
-			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<geometry>
-				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_TopBlades_v16.dae" scale="1 1 1"/>
-			</geometry>
-		</collision>	
-  
   </link>
 	<link name="Body_MHS_BottomBlades_v16">
 		<inertial>
@@ -64,12 +57,6 @@
 				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_BottomBlades_v16.dae" scale="1 1 1"/>
 			</geometry>
 		</visual>
-    <collision name="ColGeom_MHS_BottomBlades_v16">
-			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<geometry>
-				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_BottomBlades_v16.dae" scale="1 1 1"/>
-			</geometry>
-		</collision>
   </link>
 	<link name="Body_Joint_Leg02_Axis">
 		<inertial>
