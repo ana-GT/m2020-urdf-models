@@ -510,8 +510,6 @@
 		<collision name="ColGeom_Arm_LINK_2">
 			<origin xyz="-1.3416 0.4515 -0.3116" rpy="0 -0 0"/>
 			<geometry>
-				<!-- todo -->
-				<!-- <mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_2.dae" scale="1 1 1"/> -->
 				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Arm_LINK_2_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
@@ -531,7 +529,7 @@
 		<collision name="ColGeom_Arm_LINK_3">
 			<origin xyz="-2.161 0.4515 -0.3116" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_3.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Arm_LINK_3_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -550,7 +548,7 @@
 		<collision name="ColGeom_Arm_LINK_4">
 			<origin xyz="-2.9143 0.4515 -0.3116" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_4.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Arm_LINK_4_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -569,7 +567,7 @@
 		<collision name="CollGeom_Arm_LINK_5">
 			<origin xyz="-2.7386 0.2724 -0.3116" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_5.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Arm_LINK_5_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>
 	</link>
@@ -588,7 +586,7 @@
 		<collision name="ColGeom_Turret">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Turret.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Turret_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>
 	</link>
@@ -644,7 +642,7 @@
 		<collision name="CollGeom_StabilizerFar">
 			<origin xyz="0.208499 -5.1e-05 -3.438e-05" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/StabilizerFarInTurret.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/StabilizerFarInTurret_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -663,7 +661,7 @@
 		<collision name="CollGeom_StabilizerNear">
 			<origin xyz="0.208499 -5.1e-05 -3.438e-05" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/StabilizerNearInTurret.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/StabilizerNearInTurret_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -682,7 +680,7 @@
 		<collision name="CollGeom_WATSON_Cap">
 			<origin xyz="-2.6025 0.581204 0.0309103" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/WATSON_Camera_Cap.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/WATSON_Camera_Cap_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -701,7 +699,7 @@
 		<collision name="CollGeom_SHERLOC_Cap">
 			<origin xyz="-2.86084 0.58439 -0.0124626" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/ContextImager_Cap.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/ContextImager_Cap_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
