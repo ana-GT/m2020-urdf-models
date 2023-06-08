@@ -10,9 +10,17 @@
     </group>
 
     <group name="head">
-      <joint name="RSM_AZ_ENC" />
-      <joint name="RSM_EL_ENC" />      
+      <link name="Body_RSM_AZ" />
+      <link name="Body_RSM_EL" />
     </group>
+
+    <group name="camera_chain">
+      <chain base_link="base_footprint" tip_link="kinect_optical_frame" />
+    </group>
+
+    <end_effector name="camera_ee" parent_link="Body_RSM_AZ" group="head" parent_group="camera_chain" />
+
+
     <!-- Limit joints: AZ_ENC: [0, 6.31] EL_ENC: [0, 3.1765]-->
     <group_state name="head_front" group="head">
         <joint name="RSM_AZ_ENC" value="3.1416"/>
@@ -89,6 +97,7 @@
         <joint name="JOINT4_ENC" value="0.905" />
         <joint name="JOINT5_ENC" value="0.0" />
     </group_state>
+
 
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="end_tool_ee" parent_link="Frame_DRILL" group="end_tool" parent_group="arm" />
