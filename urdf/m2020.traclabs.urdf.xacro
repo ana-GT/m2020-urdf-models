@@ -179,7 +179,7 @@
 		<collision name="CollGeom_Steer_LeftRear">
 			<origin xyz="1.165 1.0625 -0.8705" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Steer_LeftRear.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Steer_LeftRear_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -236,7 +236,7 @@
 		<collision name="CollGeom_Steer_LeftFront">
 			<origin xyz="-1.095 1.0625 -0.8705" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Steer_LeftFront.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Steer_LeftFront_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -274,7 +274,7 @@
 		<collision name="ColGeom_Right_Rocker">
 			<origin xyz="-0.214 -0.79959 -0.2405" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Right_Rocker.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Right_Rocker_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>
 
@@ -313,7 +313,7 @@
 		<collision name="CollGeom_Steer_RightRear">
 			<origin xyz="1.165 -1.0625 -0.8705" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Steer_RightRear.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Steer_RightRear_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -370,7 +370,7 @@
 		<collision name="CollGeom_Steer_RightFront">
 			<origin xyz="-1.095 -1.0625 -0.8705" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Steer_RightFront.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Steer_RightFront_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -408,7 +408,7 @@
 		<collision name="CollGeom_RSM">
 			<origin xyz="-0.714017 -0.559028 0.78589" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/RSM.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/RSM_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>
 	</link>
@@ -427,7 +427,7 @@
 		<collision name="CollGeom_RSM_HEAD">
 			<origin xyz="-0.714017 -0.559028 0.78589" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/RSM_Head.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/RSM_Head_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -446,7 +446,7 @@
 		<collision name="CollGeom_HGA_AZ">
 			<origin xyz="0.46 0.475 -0.0005" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/HGA_AZ.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/HGA_AZ_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -465,7 +465,7 @@
 		<collision name="CollGeom_HGA_EL">
 			<origin xyz="0.46 0.475 0.2475" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/HGA_EL.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/HGA_EL_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -491,7 +491,7 @@
 		<collision name="ColGeom_Arm_LINK_1">
 			<origin xyz="-1.1756 0.4515 -0.3116" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_1.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Arm_LINK_1_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>				
 	</link>
@@ -510,7 +510,9 @@
 		<collision name="ColGeom_Arm_LINK_2">
 			<origin xyz="-1.3416 0.4515 -0.3116" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_2.dae" scale="1 1 1"/>
+				<!-- todo -->
+				<!-- <mesh filename="package://m2020_urdf_models/rover/meshes/Arm_LINK_2.dae" scale="1 1 1"/> -->
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Arm_LINK_2_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
