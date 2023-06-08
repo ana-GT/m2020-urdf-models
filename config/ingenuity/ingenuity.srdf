@@ -2,6 +2,19 @@
 
 <robot name="ingenuity">
 
+    <group name="camera">
+      <link name="Frame_MHS_NAVCAM" />
+    </group>
+
+    <group name="camera_chain">
+      <chain base_link="root" tip_link="Body_MHS_MainBody_v16" />
+    </group>
+
+    <end_effector name="camera_ee" parent_link="Body_MHS_MainBody_v16" group="camera" parent_group="camera_chain" />
+
+    <group_state name="camera_zero" group="camera">
+    </group_state>
+
     <group name="legs">
         <link name="Body_MHS_MainBody_v16"/>
         <joint name="Joint_Leg01_Axis" />
