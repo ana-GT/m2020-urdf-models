@@ -87,7 +87,7 @@
 		<collision name="CollGeom_CHASSIS">
 			<origin xyz="0.09002 0 -1.13338" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/CHASSIS.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/CHASSIS_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -122,7 +122,7 @@
 		<collision name="CollGeom_CenterDifferential">
 			<origin xyz="0.142 0 0" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/CenterDifferential.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/CenterDifferential_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>
 	</link>
@@ -141,7 +141,7 @@
 		<collision name="CollGeom_Left_Rocker">
 			<origin xyz="-0.214 0.79959 -0.2405" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Left_Rocker.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Left_Rocker_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>	
 	</link>
@@ -160,7 +160,7 @@
 		<collision name="CollGeom_Left_Bogie">
 			<origin xyz="0.54 0.91959 -0.4705" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Left_Bogie.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Left_Bogie_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
@@ -294,7 +294,7 @@
 		<collision name="ColGeom_Right_Bogie">
 			<origin xyz="0.54 -0.91959 -0.4705" rpy="0 -0 0"/>
 			<geometry>
-				<mesh filename="package://m2020_urdf_models/rover/meshes/Right_Bogie.dae" scale="1 1 1"/>
+				<mesh filename="package://m2020_urdf_models/rover/meshes/low_res/Right_Bogie_low_res.stl" scale="1 1 1"/>
 			</geometry>
 		</collision>		
 	</link>
