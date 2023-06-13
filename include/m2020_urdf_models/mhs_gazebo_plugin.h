@@ -7,14 +7,14 @@
 #include <random>
 
 #include <ros/ros.h>
-#include <ros/callback_queue.h>
 
 #include <gazebo/common/Plugin.hh>
 #include <gazebo/physics/physics.hh>
 #include <gazebo/util/system.hh>
 #include <gazebo/physics/Joint.hh>
 
-#include <gazebo_msgs/SetModelState.h>
+#include <geometry_msgs/Twist.h>
+#include <geometry_msgs/Pose.h>
 
 namespace gazebo
 {
@@ -48,21 +48,18 @@ namespace gazebo
     private: ignition::math::Vector3d target;
 
     /// \brief Time of the last update.
-    private: common::Time lastUpdate;
+    private: ros::Time lastUpdate;
 
 
     protected:
-      void QueueThread();
+      void OnRosVelCmdMsg(const geometry_msgs::TwistConstPtr &_msg);
+      void OnRosPoseCmdMsg(const geometry_msgs::PoseConstPtr &_msg);
 
       std::unique_ptr<ros::NodeHandle> rosNode;
-
-      /// \brief A ROS callbackqueue that helps process messages
-      ros::CallbackQueue rosQueue;
-
-      /// \brief A thread the keeps running the rosQueue
-      std::thread rosQueueThread;
+      ros::Subscriber rosVelCmdSub, rosPoseSub;
 
       double blade_vel_;
+      double dt_;
   };
 }
 #endif

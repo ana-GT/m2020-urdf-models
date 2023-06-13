@@ -12,13 +12,14 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   xacro
   gazebo_ros
+  geometry_msgs
 )
 
 
 catkin_package(
  INCLUDE_DIRS include
  LIBRARIES mhs_gazebo_plugin
-  CATKIN_DEPENDS roscpp xacro gazebo_ros
+  CATKIN_DEPENDS roscpp xacro gazebo_ros geometry_msgs
   DEPENDS 
 )
 

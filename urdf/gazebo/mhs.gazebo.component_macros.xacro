@@ -75,12 +75,16 @@
     <xacro:gazebo_link prefix="${prefix}" link_name="Body_MHS_Leg04_v16" collide="true" static="${static}" gravity_off="${gravity_off}"/>
 
 
+    <xacro:gazebo_joint prefix="${prefix}" joint_name="MHS_TopBlades_v16" kd="0" kp="1"/>
+    <xacro:gazebo_joint prefix="${prefix}" joint_name="MHS_BottomBlades_v16" kd="0" kp="1"/>
     <xacro:gazebo_joint prefix="${prefix}" joint_name="Joint_Leg01_Axis" kd="0" kp="1"/>
     <xacro:gazebo_joint prefix="${prefix}" joint_name="Joint_Leg02_Axis" kd="0" kp="1"/>
     <xacro:gazebo_joint prefix="${prefix}" joint_name="Joint_Leg03_Axis" kd="0" kp="1"/>
     <xacro:gazebo_joint prefix="${prefix}" joint_name="Joint_Leg04_Axis" kd="0" kp="1"/>
 
 
+    <xacro:gazebo_simple_trans prefix="${prefix}" joint_name="MHS_TopBlades_v16" reduction="1" tc="1"/>
+    <xacro:gazebo_simple_trans prefix="${prefix}" joint_name="MHS_BottomBlades_v16" reduction="1" tc="1"/>
     <xacro:gazebo_simple_trans prefix="${prefix}" joint_name="Joint_Leg01_Axis" reduction="1" tc="1"/>
     <xacro:gazebo_simple_trans prefix="${prefix}" joint_name="Joint_Leg02_Axis" reduction="1" tc="1"/>
     <xacro:gazebo_simple_trans prefix="${prefix}" joint_name="Joint_Leg03_Axis" reduction="1" tc="1"/>

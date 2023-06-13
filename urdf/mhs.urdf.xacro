@@ -27,9 +27,9 @@
 		</visual>
 		<collision name="ColGeom_MHS_MainBody_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-<!--       <geometry>
-        <box size="1.22 1.22 0.55" />
-      </geometry> -->
+      <!-- <geometry> -->
+        <!-- <box size="1.22 1.22 0.55" /> -->
+      <!-- </geometry> -->
 			<geometry>
 				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_MainBody_v16.dae" scale="1 1 1"/>
 			</geometry>
