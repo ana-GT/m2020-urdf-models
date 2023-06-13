@@ -4,39 +4,51 @@ project(m2020_urdf_models)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(gazebo REQUIRED)
+include_directories(${GAZEBO_INCLUDE_DIRS})
 
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   xacro
+  gazebo_ros
 )
 
 
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES attach_model_plugin
-  CATKIN_DEPENDS roscpp xacro
+ INCLUDE_DIRS include
+ LIBRARIES mhs_gazebo_plugin
+  CATKIN_DEPENDS roscpp xacro gazebo_ros
   DEPENDS 
 )
 
-#include_directories(
-# include
-# ${catkin_INCLUDE_DIRS}
-#)
-
-#link_directories(${catkin_LIBRARY_DIRS})
+include_directories(
+include
+${catkin_INCLUDE_DIRS}
+ ${GAZEBO_INCLUDE_DIRS}
 
 
-#install(TARGETS
-#  gazebo_grasp_ui attach_model_plugin move_model_plugin
-#  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-#)
+link_directories(${catkin_LIBRARY_DIRS}))
 
 
-install(DIRECTORY launch 
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+add_library(mhs_gazebo_plugin SHARED src/mhs_gazebo_plugin.cpp)
+target_link_libraries(mhs_gazebo_plugin ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES})
+add_dependencies(mhs_gazebo_plugin ${catkin_EXPORTED_TARGETS})
+
+
+install(TARGETS
+  mhs_gazebo_plugin
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+
+
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
+  PATTERN ".svn" EXCLUDE
+)
+
 
 
