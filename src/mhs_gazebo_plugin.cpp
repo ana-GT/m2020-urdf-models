@@ -26,8 +26,8 @@ void MHSPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
 
   this->Reset();
 
-  this->model_->GetJoint("MHS_TopBlades_v16")->SetVelocity(0, blade_inc_);
-  this->model_->GetJoint("MHS_BottomBlades_v16")->SetVelocity(0, -blade_inc_);
+  this->model_->GetJoint("MHS_TopBlades_v16")->SetVelocity(0, blade_vel_);
+  this->model_->GetJoint("MHS_BottomBlades_v16")->SetVelocity(0, -blade_vel_);
   this->model_->GetJoint("Joint_Leg01_Axis")->SetPosition(0, 0);
   this->model_->GetJoint("Joint_Leg02_Axis")->SetPosition(0, 0);
   this->model_->GetJoint("Joint_Leg03_Axis")->SetPosition(0, 0);
@@ -71,7 +71,7 @@ void MHSPlugin::OnUpdate(const common::UpdateInfo &_info)
   ignition::math::Pose3d pose = this->model_->WorldPose();
 
   ROS_INFO_STREAM_THROTTLE(1.0, "MHSPlugin::OnUpdate() -- setting model state for " << this->model_->GetName());
-  ignition::math::Vector3d target_pos(this->x_pos_,0,2.0);
+  ignition::math::Vector3d target_pos(0.0,0,2.0);
   ignition::math::Quaterniond target_rot(1.0,0.0,0.0,0.0);
   target_rot.Normalize();
   ignition::math::Pose3d target_pose(target_pos,target_rot);
@@ -82,8 +82,8 @@ void MHSPlugin::OnUpdate(const common::UpdateInfo &_info)
   this->model_->GetJoint("Joint_Leg02_Axis")->SetPosition(0, 0);
   this->model_->GetJoint("Joint_Leg03_Axis")->SetPosition(0, 0);
   this->model_->GetJoint("Joint_Leg04_Axis")->SetPosition(0, 0);
-  this->model_->GetJoint("MHS_TopBlades_v16")->SetVelocity(0, blade_inc_);
-  this->model_->GetJoint("MHS_BottomBlades_v16")->SetVelocity(0, -blade_inc_);
+  this->model_->GetJoint("MHS_TopBlades_v16")->SetVelocity(0, blade_vel_);
+  this->model_->GetJoint("MHS_BottomBlades_v16")->SetVelocity(0, -blade_vel_);
 
   this->lastUpdate = _info.simTime;
 }
