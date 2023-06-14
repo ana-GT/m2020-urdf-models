@@ -10,24 +10,72 @@ MHSPlugin::MHSPlugin()
 }
 
 /////////////////////////////////////////////////
-void MHSPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
+void MHSPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf) 
 {
+  ROS_INFO_STREAM("************** MHSPlugin " << _model->GetName());
+
   this->sdf = _sdf;
   this->model_ = _model;
 
-  this->rosNode.reset(new ros::NodeHandle("mhs_gazebo_plugin"));
-  
-  this->blade_vel_ = 251.32;
+  // get SDF parameters
+  this->blade_vel_ = 251.00;
+  this->use_pose_input_ = false;
+  this->pose_input_topic_ = "/base_controller/command/pose_cmd";
+  this->vel_input_topic_ = "/base_controller/command";
+  this->noise_ = 0.0;
+  this->robot_namespace_ = "";
 
-  ROS_WARN_STREAM("************** MHSPlugin " << this->model_->GetName());
+  if (_sdf->HasElement("bladeVel"))
+  {
+    this->blade_vel_ = _sdf->GetElement("bladeVel")->Get<double>();
+  }
+  if (_sdf->HasElement("usePoseInput"))
+  {
+    this->use_pose_input_ = _sdf->GetElement("usePoseInput")->Get<bool>();
+  }
+  if (_sdf->HasElement("poseInputTopic"))
+  {
+    this->pose_input_topic_ = _sdf->GetElement("poseInputTopic")->Get<std::string>();
+  }
+  if (_sdf->HasElement("velInputTopic"))
+  {
+    this->vel_input_topic_ = _sdf->GetElement("velInputTopic")->Get<std::string>();
+  }
+  if (_sdf->HasElement("xyz"))
+  {
+    this->xyz_ = _sdf->GetElement("xyz")->Get<ignition::math::Vector3d>();
+  }
+  if (_sdf->HasElement("noise"))
+  {
+    this->noise_ = _sdf->GetElement("noise")->Get<double>();
+  }
+  if (_sdf->HasElement("robotNamespace"))
+  {
+    this->robot_namespace_ = _sdf->GetElement("robotNamespace")->Get<std::string>();
+  }
+  
+  pose_input_topic_ = robot_namespace_ + pose_input_topic_;
+  vel_input_topic_ = robot_namespace_ + vel_input_topic_;
+
+  ROS_INFO_STREAM("=================================");
+  ROS_INFO_STREAM("MHSPlugin params");
+  ROS_INFO_STREAM("MHSPlugin::xyz: [" << this->xyz_.X() << ", " << this->xyz_.Y() << ", " << this->xyz_.Z() << "]");
+  ROS_INFO_STREAM("MHSPlugin::noise: " << noise_);
+  ROS_INFO_STREAM("MHSPlugin::bladeVel: " << blade_vel_);
+  ROS_INFO_STREAM("MHSPlugin::robotNamespace: " << robot_namespace_);
+  ROS_INFO_STREAM("MHSPlugin::usePoseInput: " << use_pose_input_);
+  if (use_pose_input_) ROS_INFO_STREAM("MHSPlugin::poseInputTopic: " << pose_input_topic_);
+  if (!use_pose_input_) ROS_INFO_STREAM("MHSPlugin::velInputTopic: " << vel_input_topic_);
+  ROS_INFO_STREAM("=================================");
 
   this->connections.push_back(event::Events::ConnectWorldUpdateBegin(
           std::bind(&MHSPlugin::OnUpdate, this, std::placeholders::_1)));
 
   this->Reset();
 
-  ignition::math::Vector3d target_pos(0.0,0,2.5);
-  ignition::math::Quaterniond target_rot(1.0,0.0,0.0,0.0);
+  // set inition conditions of the drone
+  ignition::math::Vector3d target_pos(this->xyz_.X(), this->xyz_.Y(), this->xyz_.Z());
+  ignition::math::Quaterniond target_rot(1.0, 0.0, 0.0, 0.0);
   target_rot.Normalize();
   ignition::math::Pose3d target_pose(target_pos,target_rot);
   this->model_->SetWorldPose(target_pose);
@@ -40,6 +88,7 @@ void MHSPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   this->model_->GetJoint("Joint_Leg04_Axis")->SetPosition(0, 0);
 
   // Initialize ros, if it has not already bee initialized.
+  this->rosNode.reset(new ros::NodeHandle("mhs_gazebo_plugin"));
   if (!ros::isInitialized())
   {
     int argc = 0;
@@ -47,14 +96,18 @@ void MHSPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     ros::init(argc, argv, "gazebo_client", ros::init_options::NoSigintHandler);
   }
 
-  ROS_WARN_STREAM("************ MHSPlugin() -- subscribing to command topic"); 
-
-  // this->rosVelCmdSub = this->rosNode->subscribe("/base_controller/command", 10,
-                                    // &MHSPlugin::OnRosVelCmdMsg, this);
-
-  this->rosPoseSub = this->rosNode->subscribe("/base_controller/command/pose", 10,
-                                    &MHSPlugin::OnRosPoseCmdMsg, this);
+  if (this->use_pose_input_)
+  {
+    this->rosPoseSub = this->rosNode->subscribe(this->pose_input_topic_, 10,
+                                                &MHSPlugin::OnRosPoseCmdMsg, this);
+  }
+  else
+  {
+    this->rosVelCmdSub = this->rosNode->subscribe(this->vel_input_topic_, 10,
+                                                  &MHSPlugin::OnRosVelCmdMsg, this);
+  }
 }
+
 
 /////////////////////////////////////////////////
 void MHSPlugin::Reset()
@@ -139,9 +192,11 @@ void MHSPlugin::OnRosVelCmdMsg(const geometry_msgs::TwistConstPtr &_msg)
 void MHSPlugin::OnRosPoseCmdMsg(const geometry_msgs::PoseConstPtr &_msg)
 {
   ROS_INFO_STREAM_THROTTLE(1.0, "MHSPlugin::OnRosPoseCmdMsg() -- setting model state for " << this->model_->GetName());
-  ignition::math::Vector3d target_pos(_msg->position.x,_msg->position.y,_msg->position.z);
-  ignition::math::Quaterniond target_rot(_msg->orientation.w,_msg->orientation.x,_msg->orientation.y,_msg->orientation.z);
+
+  ignition::math::Vector3d target_pos(_msg->position.x, _msg->position.y, _msg->position.z);
+  ignition::math::Quaterniond target_rot(_msg->orientation.w, _msg->orientation.x, _msg->orientation.y, _msg->orientation.z);
   target_rot.Normalize();
+
   ignition::math::Pose3d target_pose(target_pos,target_rot);
   this->model_->SetWorldPose(target_pose);
 }
@@ -158,4 +213,20 @@ void MHSPlugin::OnUpdate(const common::UpdateInfo &_info)
   this->model_->GetJoint("Joint_Leg04_Axis")->SetPosition(0, 0);
   this->model_->GetJoint("MHS_TopBlades_v16")->SetVelocity(0, blade_vel_);
   this->model_->GetJoint("MHS_BottomBlades_v16")->SetVelocity(0, -blade_vel_);
+
+
+  // noise stuff
+  static std::uniform_real_distribution<double> dx(-1*this->noise_, this->noise_);
+  static std::uniform_real_distribution<double> dy(-1*this->noise_, this->noise_);
+  static std::uniform_real_distribution<double> dz(-1*this->noise_, this->noise_);
+
+  double x = pose.Pos().X() + dx(rgen_);
+  double y = pose.Pos().Y() + dy(rgen_);
+  double z = pose.Pos().Z() + dz(rgen_);
+
+  ignition::math::Vector3d pos(x, y, z);
+  ignition::math::Quaterniond rot = pose.Rot();
+  ignition::math::Pose3d new_pose(pos,rot);
+  this->model_->SetWorldPose(new_pose);
+
 }

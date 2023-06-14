@@ -20,36 +20,22 @@ namespace gazebo
 {
   class MHSPlugin : public ModelPlugin
   {
-    /// \brief Constructor
-    public: MHSPlugin();
+    public:
+      MHSPlugin();
 
-    /// \brief Load the model plugin.
-    /// \param[in] _model Pointer to the parent model.
-    /// \param[in] _sdf Pointer to the plugin's SDF elements.
-    public: virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
+      virtual void Load(physics::ModelPtr _model, sdf::ElementPtr _sdf);
+      virtual void Reset();
 
-    // Documentation Inherited.
-    public: virtual void Reset();
+    private:
+      void OnUpdate(const common::UpdateInfo &_info);
 
-    /// \brief Function that is called every update cycle.
-    /// \param[in] _info Timing information
-    private: void OnUpdate(const common::UpdateInfo &_info);
+      physics::ModelPtr model_;
+      sdf::ElementPtr sdf;
+      std::vector<event::ConnectionPtr> connections;
+      ignition::math::Vector3d target;
+      ros::Time lastUpdate;
 
-    /// \brief Pointer to the parent model.
-    private: physics::ModelPtr model_;
-
-    /// \brief Pointer to the sdf element.
-    private: sdf::ElementPtr sdf;
-
-    /// \brief List of connections
-    private: std::vector<event::ConnectionPtr> connections;
-
-    /// \brief Current target location
-    private: ignition::math::Vector3d target;
-
-    /// \brief Time of the last update.
-    private: ros::Time lastUpdate;
-
+      std::default_random_engine rgen_;
 
     protected:
       void OnRosVelCmdMsg(const geometry_msgs::TwistConstPtr &_msg);
@@ -58,8 +44,15 @@ namespace gazebo
       std::unique_ptr<ros::NodeHandle> rosNode;
       ros::Subscriber rosVelCmdSub, rosPoseSub;
 
+      std::string robot_namespace_;
+      std::string pose_input_topic_;
+      std::string vel_input_topic_;
+      bool use_pose_input_;
       double blade_vel_;
+      ignition::math::Vector3d xyz_;
+      double noise_;
       double dt_;
+
   };
 }
 #endif

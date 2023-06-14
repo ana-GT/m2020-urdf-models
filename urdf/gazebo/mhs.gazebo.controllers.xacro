@@ -15,6 +15,13 @@
     <gazebo>
       <plugin name="mhs_gazebo_plugin" filename="libmhs_gazebo_plugin.so">
         <robotSimType>m2020_urdf_models/MHSPlugin</robotSimType>
+        <bladeVel>251.32</bladeVel>
+        <usePoseInput>true</usePoseInput>
+        <poseInputTopic>/base_controller/command/pose_cmd</poseInputTopic>
+        <velInputTopic>/base_controller/command</velInputTopic>
+        <robotNamespace>${robot_namespace}</robotNamespace>
+        <xyz>0.0 -2.0 2.5</xyz>
+        <noise>0.0001</noise>
       </plugin>
     </gazebo>
 
