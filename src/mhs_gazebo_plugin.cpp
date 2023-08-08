@@ -57,6 +57,8 @@ void MHSPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   pose_input_topic_ = robot_namespace_ + pose_input_topic_;
   vel_input_topic_ = robot_namespace_ + vel_input_topic_;
 
+  this->model_->SetGravityMode(false);
+
   ROS_INFO_STREAM("=================================");
   ROS_INFO_STREAM("MHSPlugin params");
   ROS_INFO_STREAM("MHSPlugin::xyz: [" << this->xyz_.X() << ", " << this->xyz_.Y() << ", " << this->xyz_.Z() << "]");
