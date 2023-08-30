@@ -10,15 +10,19 @@
     </group>
 
     <group name="head">
-      <link name="Body_RSM_AZ" />
-      <link name="Body_RSM_EL" />
+      <joint name="RSM_AZ_ENC" />
+      <joint name="RSM_EL_ENC"  />  
     </group>
 
     <group name="camera_chain">
-      <chain base_link="base_footprint" tip_link="kinect_optical_frame" />
+      <chain base_link="base_footprint" tip_link="Body_RSM_EL" />
     </group>
 
-    <end_effector name="camera_ee" parent_link="Body_RSM_AZ" group="head" parent_group="camera_chain" />
+    <end_effector name="camera_ee" parent_link="Body_RSM_EL" group="camera" parent_group="camera_chain" />
+
+    <group name="camera">
+      <link name="Body_RSM_EL" />
+    </group>
 
 
     <!-- Limit joints: AZ_ENC: [0, 6.31] EL_ENC: [0, 3.1765]-->

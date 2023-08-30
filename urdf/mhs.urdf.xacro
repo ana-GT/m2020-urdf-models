@@ -9,15 +9,15 @@
 	<link name="root">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 	</link>
 	<link name="Body_MHS_MainBody_v16">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="10"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 		<visual name="VisGeom_MHS_MainBody_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -27,16 +27,19 @@
 		</visual>
 		<collision name="ColGeom_MHS_MainBody_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-      <geometry>
-        <box size="1.22 1.22 0.55" />
-      </geometry>
+      <!-- <geometry> -->
+        <!-- <box size="1.22 1.22 0.55" /> -->
+      <!-- </geometry> -->
+			<geometry>
+				<mesh filename="package://m2020_urdf_models/mhs/meshes/MHS_MainBody_v16.dae" scale="1 1 1"/>
+			</geometry>
 		</collision>
 	</link>
 	<link name="Body_MHS_TopBlades_v16">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 		<visual name="VisGeom_MHS_TopBlades_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -48,8 +51,8 @@
 	<link name="Body_MHS_BottomBlades_v16">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 		<visual name="VisGeom_MHS_BottomBlades_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -61,15 +64,15 @@
 	<link name="Body_Joint_Leg02_Axis">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 	</link>
 	<link name="Body_MHS_Leg02_v16">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 		<visual name="VisGeom_MHS_Leg02_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -87,15 +90,15 @@
 	<link name="Body_Joint_Leg01_Axis">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 	</link>
 	<link name="Body_MHS_Leg01_v16">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 		<visual name="VisGeom_MHS_Leg01_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -113,15 +116,15 @@
 	<link name="Body_Joint_Leg03_Axis">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 	</link>
 	<link name="Body_MHS_Leg03_v16">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 		<visual name="VisGeom_MHS_Leg03_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -139,15 +142,15 @@
 	<link name="Body_Joint_Leg04_Axis">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 	</link>
 	<link name="Body_MHS_Leg04_v16">
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
-			<mass value="0"/>
-			<inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+			<mass value="0.1"/>
+			<inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
 		</inertial>
 		<visual name="VisGeom_MHS_Leg04_v16">
 			<origin xyz="0 0 0" rpy="0 -0 0"/>
@@ -168,19 +171,19 @@
 		<parent link="root"/>
 		<child link="Body_MHS_MainBody_v16"/>
 	</joint>
-	<joint name="MHS_TopBlades_v16" type="revolute">
+	<joint name="MHS_TopBlades_v16" type="continuous">
 		<origin xyz="0 0 0" rpy="0 -0 0"/>
 		<parent link="Body_MHS_MainBody_v16"/>
 		<child link="Body_MHS_TopBlades_v16"/>
 		<axis xyz="0 0 1"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
-	<joint name="MHS_BottomBlades_v16" type="revolute">
+	<joint name="MHS_BottomBlades_v16" type="continuous">
 		<origin xyz="0 0 0" rpy="0 -0 0.994839"/>
 		<parent link="Body_MHS_MainBody_v16"/>
 		<child link="Body_MHS_BottomBlades_v16"/>
 		<axis xyz="0 0 1"/>
-		<limit lower="-1.79769e+308" upper="1.79769e+308" effort="1.79769e+308" velocity="1.79769e+308"/>
+		<limit effort="1.79769e+308" velocity="1.79769e+308"/>
 	</joint>
 	<joint name="Joint_Leg02_Axis" type="revolute">
 		<origin xyz="-0.0799965 -0.0899998 0.013566" rpy="-0.0338305 -0.721918 0.0511692"/>

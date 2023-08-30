@@ -12,5 +12,11 @@
   
   <depend>roscpp</depend>
   <depend>xacro</depend>
+  <depend>gazebo_ros</depend>
+  <depend>geometry_msgs</depend>
+
+  <export>
+    <gazebo_ros plugin_path="${prefix}/lib" />
+  </export>
 
 </package>
