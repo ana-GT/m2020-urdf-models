@@ -93,7 +93,7 @@
     <node name="model_states_converter" pkg="gazebo_utils" type="model_states_converter">
       <param name="frequency" value="100.0" />
       <param name="tf_odom_frame" value="world"/>
-      <param name="tf_base_frame" value="$(arg robot_name)/base_footprint"/>
+      <param name="tf_base_frame" value="base_footprint"/>
       <param name="model_name" value="$(arg robot_name)"/>
     </node>                     
   
