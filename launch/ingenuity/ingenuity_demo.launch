@@ -45,7 +45,7 @@
   </include>
 
   <!-- Navigation -->
-  <include file="$(find craftsman_navigation_tools)/launch/craftsman_navigation_setup.launch">
+  <include file="$(find craftsman_navigation_tinterface)/launch/craftsman_navigation_setup.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="use_namespace" value="$(arg use_namespace)"/>
     <arg name="rviz_sim" value="$(arg sim)"/>
