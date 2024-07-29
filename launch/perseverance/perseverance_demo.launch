@@ -70,10 +70,7 @@
     <arg name="nav_controller" value="mobile_base_controller/cmd_vel"/> <!-- if="$(arg sim)" unless --> 
     <arg name="nav_default_planner" value="$(arg nav_default_planner)"/>
     <arg name="nav_default_executor" value="$(arg nav_default_executor)"/>
-
-    <arg name="nav_path_step" value="0.015"/>
     <arg name="nav_file_path" value="$(find m2020_urdf_models)/config/perseverance/perseverance_navigation.yaml"/>
-    
     <arg name="x" value="$(arg x)"/>
     <arg name="y" value="$(arg y)"/>
     <arg name="z" value="$(arg z)"/>    
