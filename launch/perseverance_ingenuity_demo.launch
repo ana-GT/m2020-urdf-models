@@ -13,11 +13,9 @@
   <arg name="z_2" default="2.0"/>
   <arg name="yaw_2" default="0.3"/>      
 
-  <arg name="nav_default_2d_planner" default="craftsman_navigation_tools::PlanarNavigationPlanner"/>
-  <arg name="nav_default_2d_executor" default="craftsman_navigation_tools::Path2DPIDNavigationExecutor"/>
+  <arg name="nav_default_2d_executor" default="craftsman_navigation_plugins::Path2DPIDNavigationExecutor"/>
 
-  <arg name="nav_default_3d_planner" default="craftsman_navigation_tools::Baseline3DNavigationPlanner"/>
-  <arg name="nav_default_3d_executor" default="craftsman_navigation_tools::Path3DPIDNavigationExecutor"/>
+  <arg name="nav_default_3d_executor" default="craftsman_navigation_plugins::Path3DPIDNavigationExecutor"/>
 
 
   <!-- Craftsman Gui allows you to control either robot -->
@@ -37,7 +35,6 @@
     <arg name="y" value="$(arg y_1)"/>
     <arg name="z" value="$(arg z_1)"/>
     <arg name="yaw" value="$(arg yaw_1)"/>    
-    <arg name="nav_default_planner" default="$(arg nav_default_2d_planner)"/>
     <arg name="nav_default_executor" default="$(arg nav_default_2d_executor)"/>            
   </include>
 
@@ -51,8 +48,7 @@
     <arg name="y" value="$(arg y_2)"/>
     <arg name="z" value="$(arg z_2)"/>
     <arg name="yaw" value="$(arg yaw_2)"/>            
-    <arg name="nav_default_planner" default="$(arg nav_default_3d_planner)"/>
-    <arg name="nav_default_executor" default="$(arg nav_default_3d_executor)"/>            
+    <arg name="nav_default_executor" default="$(arg nav_default_2d_executor)"/>            
   </include>
 
 

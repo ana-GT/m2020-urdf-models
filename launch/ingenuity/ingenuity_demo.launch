@@ -13,8 +13,7 @@
   <arg name="pitch" default="0.0"/>
   <arg name="yaw" default="0"/>
 
-  <arg name="nav_default_planner" default="craftsman_navigation_tools::Baseline3DNavigationPlanner"/>
-  <arg name="nav_default_executor" default="craftsman_navigation_tools::Path3DPIDNavigationExecutor"/>
+  <arg name="nav_default_executor" default="craftsman_navigation_plugins::Path2DPIDNavigationExecutor"/>
 
   <rosparam file="$(find m2020_urdf_models)/config/ingenuity/ingenuity_pid.yaml"/>
 
@@ -50,7 +49,6 @@
     <arg name="use_namespace" value="$(arg use_namespace)"/>
     <arg name="rviz_sim" value="$(arg sim)"/>
     <arg name="nav_controller" value="mobile_base_controller/cmd_vel"/>
-    <arg name="nav_default_planner" value="$(arg nav_default_planner)"/>
     <arg name="nav_default_executor" value="$(arg nav_default_executor)"/>
     <arg name="nav_file_path" value="$(find m2020_urdf_models)/config/ingenuity/ingenuity_navigation.yaml"/>
     <arg name="x" value="$(arg x)"/>
