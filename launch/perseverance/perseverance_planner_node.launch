@@ -5,33 +5,25 @@
   <arg name="robot_description" default="robot_description"/>
 
   <!-- planner node params -->
-  <arg name="robot_name" default="perseverance"/>  
-  <arg name="loop_rate" default="10"/>  
-  <arg name="predictive_display" default="true"/>
+  <arg name="robot_name" default="perseverance"/>
+  <arg name="loop_rate" default="10"/>
   <arg name="planner_plugin" default="tracik_planner::TracIKPlanner"/>
   <arg name="use_namespace" default="false"/>
 
   <group if="$(arg use_namespace)">
     <group ns="$(arg robot_name)">
-      <!-- the display -->
-      <include if="$(arg predictive_display)" file="$(find planner_viz)/launch/display_plan.launch">
-        <arg name="base_frame" value="base_footprint"/>
-        <arg name="robot_name" value="$(arg robot_name)" />
-        <arg name="joint_state_topic" value="/$(arg robot_name)/joint_states"/>
-      </include>
-
       <!-- Testing ref / freeze -->
       <param name="$(arg robot_name)/reference_frame" value="world"/>
       <param name="$(arg robot_name)/update_reference" value="true"/>
 
       <rosparam command="load" file="$(find m2020_urdf_models)/config/perseverance/joint_limits.yaml"/>
-      
+
       <group if="$(arg sim)">
         <node name="planner_node" pkg="planner_interface" type="planner_node" output="screen">
           <param name="loop_rate" value="$(arg loop_rate)"/>
           <param name="limits_param" value="joint_limits"/>
           <param name="robot_name" value="$(arg robot_name)"/>
-          <param name="planner_plugin" value="$(arg planner_plugin)"/>      
+          <param name="planner_plugin" value="$(arg planner_plugin)"/>
           <param name="execution_plugin" value="basic_executors::JointStateExecutor"/>
           <param name="param/execution_speed_scalar" value="0.5"/>
           <param name="publish_collision_object" value="true"/>
@@ -56,21 +48,15 @@
       </group>
     </group> <!-- ns=robot_name -->
   </group> <!-- unless=use_namespace -->
-  
-  <group unless="$(arg use_namespace)">
-    <!-- the display -->
-    <include if="$(arg predictive_display)" file="$(find planner_viz)/launch/display_plan.launch">
-      <arg name="base_frame" value="base_footprint"/>
-      <arg name="joint_state_topic" value="/joint_states"/>
-    </include>
 
+  <group unless="$(arg use_namespace)">
     <rosparam command="load" file="$(find m2020_urdf_models)/config/perseverance/joint_limits.yaml"/>
     <group if="$(arg sim)">
       <node name="planner_node" pkg="planner_interface" type="planner_node" output="screen">
         <param name="loop_rate" value="$(arg loop_rate)"/>
         <param name="limits_param" value="/joint_limits"/>
         <param name="robot_name" value="$(arg robot_name)"/>
-        <param name="planner_plugin" value="$(arg planner_plugin)"/>      
+        <param name="planner_plugin" value="$(arg planner_plugin)"/>
         <param name="execution_plugin" value="basic_executors::JointStateExecutor"/>
         <param name="param/execution_speed_scalar" value="0.25"/>
         <param name="publish_collision_object" value="true"/>
