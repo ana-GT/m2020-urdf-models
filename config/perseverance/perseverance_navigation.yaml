@@ -3,7 +3,5 @@ navigation:
   robot_frame: $(arg robot_frame_robot)/base_footprint
   footsteps: false
   holonomic: false
-  nav_planner_plugin: "craftsman_navigation_tools::CraftsmanNavigationPlanner"
-  nav_executor_plugin: "craftsman_navigation_tools::CraftsmanNavigationExecutor"
   use_namespace: $(arg use_namespace)
 

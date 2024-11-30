@@ -4,7 +4,5 @@ navigation:
   footsteps: false
   holonomic: false
   mesh: package://m2020_urdf_models/mhs/meshes/ingenuity_all_in_one_decimated.dae
-  nav_planner_plugin: "craftsman_navigation_tools::CraftsmanNavigationPlanner"
-  nav_executor_plugin: "craftsman_navigation_tools::CraftsmanNavigationExecutor"
   use_namespace: $(arg use_namespace)
 
